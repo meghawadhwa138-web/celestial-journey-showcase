@@ -1,12 +1,50 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect } from 'react';
+import CustomCursor from '@/components/CustomCursor';
+import StardustBackground from '@/components/StardustBackground';
+import Navigation from '@/components/Navigation';
+import HeroSection from '@/components/HeroSection';
+import AboutSection from '@/components/AboutSection';
+import SkillsConstellation from '@/components/SkillsConstellation';
+import ProjectsSection from '@/components/ProjectsSection';
+import TimelineSection from '@/components/TimelineSection';
+import ContactSection from '@/components/ContactSection';
+import Footer from '@/components/Footer';
 
 const Index = () => {
+  useEffect(() => {
+    // Smooth scroll polyfill for older browsers
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* Custom Cursor - Desktop only */}
+      <div className="hidden md:block">
+        <CustomCursor />
       </div>
+
+      {/* Background Effects */}
+      <StardustBackground />
+
+      {/* Navigation */}
+      <Navigation />
+
+      {/* Main Content */}
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <SkillsConstellation />
+        <ProjectsSection />
+        <TimelineSection />
+        <ContactSection />
+      </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

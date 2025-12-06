@@ -57,6 +57,20 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        rose: {
+          gold: "hsl(var(--rose-gold))",
+          glow: "hsl(var(--rose-gold-glow))",
+        },
+        lavender: {
+          DEFAULT: "hsl(var(--lavender))",
+          glow: "hsl(var(--lavender-glow))",
+        },
+        champagne: "hsl(var(--champagne))",
+        stardust: "hsl(var(--stardust))",
+      },
+      fontFamily: {
+        display: ['Cormorant Garamond', 'serif'],
+        body: ['Nunito', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -65,25 +79,51 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        twinkle: {
+          "0%, 100%": { opacity: "0.3", transform: "scale(1)" },
+          "50%": { opacity: "1", transform: "scale(1.2)" },
+        },
+        orbit: {
+          "0%": { transform: "rotate(0deg) translateX(100px) rotate(0deg)" },
+          "100%": { transform: "rotate(360deg) translateX(100px) rotate(-360deg)" },
+        },
+        slideUp: {
+          from: { opacity: "0", transform: "translateY(30px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        drawLine: {
+          from: { strokeDashoffset: "1000" },
+          to: { strokeDashoffset: "0" },
+        },
+        expandWidth: {
+          from: { width: "0%" },
+          to: { width: "var(--target-width)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        float: "float 6s ease-in-out infinite",
+        twinkle: "twinkle 3s ease-in-out infinite",
+        orbit: "orbit 20s linear infinite",
+        "slide-up": "slideUp 0.8s ease-out forwards",
+        "draw-line": "drawLine 2s ease-out forwards",
+        "expand-width": "expandWidth 1.5s ease-out forwards",
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "cosmic-gradient": "linear-gradient(135deg, hsl(var(--deep-space)) 0%, hsl(var(--cosmic-purple)) 50%, hsl(var(--deep-space)) 100%)",
       },
     },
   },
