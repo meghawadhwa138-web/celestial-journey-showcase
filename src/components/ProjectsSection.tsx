@@ -1,16 +1,18 @@
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { ExternalLink, Github, ArrowUpRight } from 'lucide-react';
+import { ExternalLink, Github, ArrowUpRight, Sparkles } from 'lucide-react';
 
 interface Project {
   id: number;
   title: string;
   description: string;
   tags: string[];
-  image: string;
+  gradient: string;
+  accentColor: string;
   liveUrl: string;
   githubUrl: string;
   featured: boolean;
+  stats: { label: string; value: string }[];
 }
 
 const projects: Project[] = [
@@ -19,163 +21,277 @@ const projects: Project[] = [
     title: 'Lumière',
     description: 'An elegant e-commerce platform for artisanal candles and home fragrances. Features a minimalist design with smooth animations and an immersive shopping experience.',
     tags: ['React', 'Next.js', 'Stripe', 'Tailwind'],
-    image: 'linear-gradient(135deg, hsl(350, 45%, 40%) 0%, hsl(280, 30%, 30%) 100%)',
+    gradient: 'from-rose-gold/20 via-primary/10 to-lavender/20',
+    accentColor: 'primary',
     liveUrl: '#',
     githubUrl: '#',
     featured: true,
+    stats: [{ label: 'Users', value: '10K+' }, { label: 'Revenue', value: '$50K' }],
   },
   {
     id: 2,
     title: 'Bloom Studio',
     description: 'A creative agency website with interactive 3D elements and parallax scrolling. Showcases portfolio work with elegant transitions.',
     tags: ['React', 'Three.js', 'GSAP', 'Framer Motion'],
-    image: 'linear-gradient(135deg, hsl(270, 40%, 35%) 0%, hsl(320, 35%, 25%) 100%)',
+    gradient: 'from-secondary/20 via-lavender/10 to-primary/20',
+    accentColor: 'secondary',
     liveUrl: '#',
     githubUrl: '#',
     featured: true,
+    stats: [{ label: 'Projects', value: '25+' }, { label: 'Clients', value: '15' }],
   },
   {
     id: 3,
     title: 'Serene',
     description: 'A mindfulness and meditation app with calming aesthetics, guided sessions, and progress tracking for mental wellness.',
     tags: ['React Native', 'TypeScript', 'Firebase'],
-    image: 'linear-gradient(135deg, hsl(200, 40%, 30%) 0%, hsl(240, 35%, 25%) 100%)',
+    gradient: 'from-accent/20 via-champagne/10 to-secondary/20',
+    accentColor: 'accent',
     liveUrl: '#',
     githubUrl: '#',
     featured: false,
+    stats: [{ label: 'Downloads', value: '5K+' }, { label: 'Rating', value: '4.9' }],
   },
   {
     id: 4,
     title: 'Atelier',
     description: 'A digital portfolio builder for artists and designers. Features customizable templates with drag-and-drop functionality.',
     tags: ['Vue.js', 'Node.js', 'MongoDB', 'AWS'],
-    image: 'linear-gradient(135deg, hsl(30, 45%, 35%) 0%, hsl(15, 40%, 30%) 100%)',
+    gradient: 'from-primary/20 via-accent/10 to-lavender/20',
+    accentColor: 'primary',
     liveUrl: '#',
     githubUrl: '#',
     featured: false,
+    stats: [{ label: 'Templates', value: '50+' }, { label: 'Artists', value: '2K' }],
   },
 ];
 
-const ProjectCard = ({ project, index, isInView }: { project: Project; index: number; isInView: boolean }) => {
+const ProjectCard3D = ({ project, index, isInView }: { 
+  project: Project; 
+  index: number; 
+  isInView: boolean;
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const rotateX = useSpring(useTransform(y, [-100, 100], [10, -10]), { stiffness: 300, damping: 30 });
+  const rotateY = useSpring(useTransform(x, [-100, 100], [-10, 10]), { stiffness: 300, damping: 30 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set(e.clientX - centerX);
+    y.set(e.clientY - centerY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    setIsHovered(false);
+  };
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
+      ref={cardRef}
+      initial={{ opacity: 0, y: 80, rotateX: -15 }}
+      animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+      transition={{ duration: 0.8, delay: index * 0.15, type: 'spring' }}
       className={`group relative ${project.featured ? 'md:col-span-2' : ''}`}
+      style={{ perspective: 1000 }}
+      onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={handleMouseLeave}
     >
-      <div className="relative overflow-hidden rounded-2xl border border-border/30 bg-card/30 backdrop-blur-sm h-full">
-        {/* Image/Gradient placeholder */}
-        <div 
-          className="relative aspect-[16/10] overflow-hidden"
-          style={{ background: project.image }}
-        >
-          {/* Overlay */}
-          <motion.div 
-            className="absolute inset-0 bg-background/60 backdrop-blur-sm flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          >
-            <motion.a
-              href={project.liveUrl}
-              className="p-3 rounded-full bg-primary/20 border border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+      <motion.div
+        className="relative h-full"
+        style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+      >
+        <div className={`relative overflow-hidden rounded-3xl border border-border/30 bg-gradient-to-br ${project.gradient} backdrop-blur-xl h-full`}>
+          {/* Animated border gradient */}
+          <motion.div
+            className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            style={{
+              background: 'linear-gradient(90deg, transparent, hsl(350, 45%, 70%, 0.3), transparent)',
+              backgroundSize: '200% 100%',
+            }}
+            animate={isHovered ? { backgroundPosition: ['200% 0', '-200% 0'] } : {}}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+
+          {/* Content wrapper */}
+          <div className="relative p-8 h-full flex flex-col">
+            {/* Top section */}
+            <div className="flex items-start justify-between mb-6">
+              <motion.div
+                className="flex items-center gap-2"
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: index * 0.15 + 0.3 }}
+              >
+                <Sparkles className="w-4 h-4 text-primary" />
+                <span className="text-xs text-primary uppercase tracking-wider">
+                  {project.featured ? 'Featured' : 'Project'}
+                </span>
+              </motion.div>
+              
+              {/* Action buttons */}
+              <motion.div 
+                className="flex gap-2"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isHovered ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <motion.a
+                  href={project.liveUrl}
+                  className="p-2.5 rounded-full bg-card/80 border border-border/50 text-foreground hover:text-primary hover:border-primary/50 transition-all"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </motion.a>
+                <motion.a
+                  href={project.githubUrl}
+                  className="p-2.5 rounded-full bg-card/80 border border-border/50 text-foreground hover:text-primary hover:border-primary/50 transition-all"
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Github className="w-4 h-4" />
+                </motion.a>
+              </motion.div>
+            </div>
+
+            {/* Title with hover effect */}
+            <motion.h3 
+              className="font-display text-3xl md:text-4xl text-foreground mb-4 relative inline-block"
+              whileHover={{ x: 5 }}
             >
-              <ExternalLink className="w-5 h-5" />
-            </motion.a>
-            <motion.a
-              href={project.githubUrl}
-              className="p-3 rounded-full bg-primary/20 border border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              {project.title}
+              <motion.span
+                className="absolute -right-6 top-1/2 -translate-y-1/2"
+                initial={{ opacity: 0, x: -10 }}
+                animate={isHovered ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+              >
+                <ArrowUpRight className="w-5 h-5 text-primary" />
+              </motion.span>
+            </motion.h3>
+
+            {/* Description */}
+            <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">
+              {project.description}
+            </p>
+
+            {/* Stats */}
+            <motion.div 
+              className="flex gap-6 mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
             >
-              <Github className="w-5 h-5" />
-            </motion.a>
-          </motion.div>
+              {project.stats.map((stat, i) => (
+                <div key={i} className="text-center">
+                  <p className="text-xl font-display text-primary">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground">{stat.label}</p>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Tags with stagger animation */}
+            <div className="flex flex-wrap gap-2">
+              {project.tags.map((tag, i) => (
+                <motion.span
+                  key={tag}
+                  initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                  animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+                  transition={{ delay: index * 0.15 + 0.4 + i * 0.05 }}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="px-3 py-1.5 text-xs rounded-full bg-card/60 text-muted-foreground border border-border/30 backdrop-blur-sm hover:border-primary/30 hover:text-foreground transition-all cursor-default"
+                >
+                  {tag}
+                </motion.span>
+              ))}
+            </div>
+          </div>
 
           {/* Floating decorative elements */}
           <motion.div
-            className="absolute top-4 right-4 w-20 h-20 rounded-full bg-stardust/10 blur-2xl"
+            className="absolute top-4 right-4 w-32 h-32 rounded-full bg-primary/5 blur-3xl pointer-events-none"
             animate={isHovered ? { scale: 1.5, opacity: 0.3 } : { scale: 1, opacity: 0.1 }}
-            transition={{ duration: 0.5 }}
+          />
+          <motion.div
+            className="absolute bottom-4 left-4 w-24 h-24 rounded-full bg-secondary/5 blur-2xl pointer-events-none"
+            animate={isHovered ? { scale: 1.3, opacity: 0.3 } : { scale: 1, opacity: 0.1 }}
           />
         </div>
-
-        {/* Content */}
-        <div className="p-6">
-          <div className="flex items-start justify-between mb-3">
-            <h3 className="font-display text-2xl text-foreground group-hover:text-primary transition-colors">
-              {project.title}
-            </h3>
-            <motion.div
-              animate={isHovered ? { x: 0, y: 0, opacity: 1 } : { x: -5, y: 5, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <ArrowUpRight className="w-5 h-5 text-primary" />
-            </motion.div>
-          </div>
-
-          <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-            {project.description}
-          </p>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1 text-xs rounded-full bg-muted/50 text-muted-foreground border border-border/30"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Hover border effect */}
-        <motion.div
-          className="absolute inset-0 rounded-2xl border-2 border-primary/0 pointer-events-none"
-          animate={isHovered ? { borderColor: 'hsl(350, 45%, 70%, 0.3)' } : { borderColor: 'hsl(350, 45%, 70%, 0)' }}
-          transition={{ duration: 0.3 }}
-        />
-      </div>
+      </motion.div>
     </motion.article>
   );
 };
 
 const ProjectsSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
 
   return (
     <section id="projects" className="relative py-32 overflow-hidden" ref={ref}>
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Header */}
+      {/* Background decoration */}
+      <motion.div
+        className="absolute top-1/4 -left-32 w-64 h-64 rounded-full bg-primary/5 blur-3xl"
+        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 -right-32 w-64 h-64 rounded-full bg-secondary/5 blur-3xl"
+        animate={{ x: [0, -30, 0], y: [0, 20, 0] }}
+        transition={{ duration: 10, repeat: Infinity }}
+      />
+
+      <div className="relative max-w-6xl mx-auto px-6">
+        {/* Header with reveal animation */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          className="text-center mb-20"
         >
-          <p className="text-primary tracking-[0.3em] uppercase text-sm mb-4">
+          <motion.p 
+            className="text-primary tracking-[0.3em] uppercase text-sm mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1 }}
+          >
             Selected Work
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl mb-6">
-            Featured <span className="text-gradient">Projects</span>
-          </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto">
+          </motion.p>
+          
+          <div className="overflow-hidden">
+            <motion.h2 
+              className="font-display text-4xl md:text-6xl mb-6"
+              initial={{ y: '100%' }}
+              animate={isInView ? { y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2, type: 'spring' }}
+            >
+              Featured <span className="text-gradient">Projects</span>
+            </motion.h2>
+          </div>
+          
+          <motion.p 
+            className="text-muted-foreground max-w-lg mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.4 }}
+          >
             A curated collection of projects that showcase my passion for 
             creating elegant, user-centered digital experiences.
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <ProjectCard 
+            <ProjectCard3D 
               key={project.id} 
               project={project} 
               index={index}
@@ -184,20 +300,33 @@ const ProjectsSection = () => {
           ))}
         </div>
 
-        {/* View all button */}
+        {/* View all button with magnetic effect */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-12"
+          className="text-center mt-16"
         >
           <motion.button
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border/50 text-foreground hover:border-primary/50 transition-all duration-300 cursor-pointer"
-            whileHover={{ scale: 1.02 }}
+            className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full border border-border/50 text-foreground overflow-hidden cursor-pointer"
+            whileHover={{ scale: 1.05, borderColor: 'hsl(350, 45%, 70%, 0.5)' }}
             whileTap={{ scale: 0.98 }}
           >
-            <span className="font-body text-sm">View All Projects</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            {/* Shimmer effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
+              initial={{ x: '-100%' }}
+              whileHover={{ x: '100%' }}
+              transition={{ duration: 0.6 }}
+            />
+            <span className="relative font-body">View All Projects</span>
+            <motion.span
+              className="relative"
+              animate={{ x: [0, 3, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <ArrowUpRight className="w-4 h-4" />
+            </motion.span>
           </motion.button>
         </motion.div>
       </div>
