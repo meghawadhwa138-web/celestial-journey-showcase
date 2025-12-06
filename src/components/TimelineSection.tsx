@@ -1,6 +1,6 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { Briefcase, GraduationCap, Award, Sparkles } from 'lucide-react';
+import { Briefcase, GraduationCap, Award, Sparkles, Star } from 'lucide-react';
 
 interface TimelineItem {
   id: number;
@@ -63,37 +63,70 @@ const getIcon = (type: string) => {
   }
 };
 
-const TimelineItem = ({ item, index, isInView }: { item: TimelineItem; index: number; isInView: boolean }) => {
+const TimelineCard = ({ item, index, isInView, isEven }: { 
+  item: TimelineItem; 
+  index: number; 
+  isInView: boolean;
+  isEven: boolean;
+}) => {
   const Icon = getIcon(item.type);
-  const isEven = index % 2 === 0;
+  const cardRef = useRef(null);
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
+      ref={cardRef}
+      initial={{ opacity: 0, x: isEven ? -80 : 80, rotateY: isEven ? -15 : 15 }}
+      animate={isInView ? { opacity: 1, x: 0, rotateY: 0 } : {}}
+      transition={{ 
+        duration: 0.8, 
+        delay: index * 0.15,
+        type: 'spring',
+        stiffness: 100,
+      }}
       className={`relative flex items-center gap-8 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}
     >
       {/* Content Card */}
       <div className={`flex-1 ${isEven ? 'md:text-right' : 'md:text-left'}`}>
         <motion.div
-          whileHover={{ y: -5 }}
-          className="group relative p-6 rounded-2xl bg-card/30 border border-border/30 backdrop-blur-sm hover:border-primary/30 transition-all duration-500"
+          whileHover={{ 
+            y: -8, 
+            scale: 1.02,
+            boxShadow: '0 20px 40px -15px hsl(350, 45%, 70%, 0.15)',
+          }}
+          className="group relative p-6 rounded-2xl bg-card/30 border border-border/30 backdrop-blur-sm hover:border-primary/40 transition-all duration-500 overflow-hidden"
         >
-          {/* Glow effect on hover */}
-          <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          {/* Animated background gradient */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          />
+          
+          {/* Shimmer effect on hover */}
+          <motion.div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100"
+            initial={{ x: '-100%' }}
+            whileHover={{ x: '100%' }}
+            transition={{ duration: 0.8 }}
+            style={{
+              background: 'linear-gradient(90deg, transparent, hsl(350, 45%, 70%, 0.1), transparent)',
+            }}
+          />
           
           <div className="relative">
-            <span className="inline-block px-3 py-1 text-xs rounded-full bg-primary/10 text-primary mb-3">
+            <motion.span 
+              className="inline-block px-3 py-1 text-xs rounded-full bg-primary/10 text-primary mb-3"
+              whileHover={{ scale: 1.1 }}
+            >
               {item.year}
-            </span>
+            </motion.span>
             
-            <h3 className="font-display text-xl text-foreground mb-1">
+            <h3 className="font-display text-xl text-foreground mb-1 group-hover:text-primary transition-colors">
               {item.title}
             </h3>
             
-            <p className="text-primary/80 text-sm mb-3">
+            <p className="text-primary/80 text-sm mb-3 flex items-center gap-1 justify-start md:justify-end">
+              {!isEven && <Star className="w-3 h-3" />}
               {item.organization}
+              {isEven && <Star className="w-3 h-3" />}
             </p>
             
             <p className="text-muted-foreground text-sm leading-relaxed">
@@ -103,21 +136,35 @@ const TimelineItem = ({ item, index, isInView }: { item: TimelineItem; index: nu
         </motion.div>
       </div>
 
-      {/* Center Icon */}
+      {/* Center Icon with pulse */}
       <div className="relative z-10 flex-shrink-0">
         <motion.div
-          initial={{ scale: 0 }}
-          animate={isInView ? { scale: 1 } : {}}
-          transition={{ duration: 0.4, delay: index * 0.2 + 0.3 }}
+          initial={{ scale: 0, rotate: -180 }}
+          animate={isInView ? { scale: 1, rotate: 0 } : {}}
+          transition={{ duration: 0.6, delay: index * 0.15 + 0.3, type: 'spring' }}
           className="relative"
         >
-          {/* Glow */}
-          <div className="absolute inset-0 w-12 h-12 rounded-full bg-primary/30 blur-xl" />
+          {/* Animated glow rings */}
+          <motion.div
+            className="absolute inset-0 w-14 h-14 rounded-full"
+            animate={{
+              boxShadow: [
+                '0 0 0 0 hsl(350, 45%, 70%, 0.4)',
+                '0 0 0 15px hsl(350, 45%, 70%, 0)',
+              ],
+            }}
+            transition={{ duration: 1.5, repeat: Infinity, delay: index * 0.2 }}
+            style={{ transform: 'translate(-4px, -4px)' }}
+          />
           
           {/* Icon container */}
-          <div className="relative w-12 h-12 rounded-full bg-card border-2 border-primary flex items-center justify-center">
+          <motion.div 
+            className="relative w-12 h-12 rounded-full bg-card border-2 border-primary flex items-center justify-center"
+            whileHover={{ scale: 1.2, rotate: 360 }}
+            transition={{ duration: 0.5 }}
+          >
             <Icon className="w-5 h-5 text-primary" />
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -137,64 +184,113 @@ const TimelineSection = () => {
     offset: ['start end', 'end start'],
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ['0%', '100%']);
+  const lineOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
     <section id="timeline" className="relative py-32 overflow-hidden" ref={ref}>
+      {/* Background particles */}
+      {Array.from({ length: 15 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 rounded-full bg-primary/30"
+          style={{
+            left: `${10 + Math.random() * 80}%`,
+            top: `${10 + Math.random() * 80}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0.2, 0.6, 0.2],
+          }}
+          transition={{
+            duration: 4 + Math.random() * 2,
+            repeat: Infinity,
+            delay: Math.random() * 3,
+          }}
+        />
+      ))}
+
       <div className="max-w-4xl mx-auto px-6" ref={containerRef}>
-        {/* Header */}
+        {/* Header with reveal animation */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <p className="text-primary tracking-[0.3em] uppercase text-sm mb-4">
+          <motion.p 
+            className="text-primary tracking-[0.3em] uppercase text-sm mb-4"
+            initial={{ opacity: 0, letterSpacing: '0.1em' }}
+            animate={isInView ? { opacity: 1, letterSpacing: '0.3em' } : {}}
+            transition={{ duration: 1 }}
+          >
             My Path
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl mb-6">
-            The <span className="text-gradient">Journey</span>
-          </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto">
+          </motion.p>
+          
+          <div className="overflow-hidden">
+            <motion.h2 
+              className="font-display text-4xl md:text-5xl mb-6"
+              initial={{ y: 80 }}
+              animate={isInView ? { y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              The <span className="text-gradient">Journey</span>
+            </motion.h2>
+          </div>
+          
+          <motion.p 
+            className="text-muted-foreground max-w-lg mx-auto"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.4 }}
+          >
             A timeline of milestones that have shaped my career and 
             fueled my passion for creating beautiful digital experiences.
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Center line */}
+          {/* Center line with scroll progress */}
           <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 hidden md:block">
-            {/* Background line */}
             <div className="absolute inset-0 bg-border/30" />
-            
-            {/* Animated fill */}
             <motion.div 
-              className="absolute top-0 left-0 right-0 bg-gradient-to-b from-primary via-secondary to-primary/30 origin-top"
-              style={{ height: lineHeight }}
+              className="absolute top-0 left-0 right-0 bg-gradient-to-b from-primary via-secondary to-accent origin-top"
+              style={{ height: lineHeight, opacity: lineOpacity }}
             />
           </div>
 
           {/* Timeline items */}
-          <div className="space-y-12">
+          <div className="space-y-16">
             {timelineData.map((item, index) => (
-              <TimelineItem 
+              <TimelineCard 
                 key={item.id} 
                 item={item} 
                 index={index}
                 isInView={isInView}
+                isEven={index % 2 === 0}
               />
             ))}
           </div>
 
-          {/* End decoration */}
+          {/* End decoration with bloom effect */}
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={isInView ? { scale: 1, opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: timelineData.length * 0.2 + 0.3 }}
+            transition={{ duration: 0.6, delay: timelineData.length * 0.15 + 0.5 }}
             className="absolute left-1/2 -translate-x-1/2 -bottom-8 hidden md:block"
           >
-            <div className="w-4 h-4 rounded-full bg-primary/50 border-2 border-primary" />
+            <motion.div
+              animate={{
+                boxShadow: [
+                  '0 0 20px 10px hsl(350, 45%, 70%, 0.2)',
+                  '0 0 30px 15px hsl(350, 45%, 70%, 0.3)',
+                  '0 0 20px 10px hsl(350, 45%, 70%, 0.2)',
+                ],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-4 h-4 rounded-full bg-primary/50 border-2 border-primary"
+            />
           </motion.div>
         </div>
       </div>
