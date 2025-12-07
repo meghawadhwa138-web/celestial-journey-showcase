@@ -31,7 +31,7 @@ const HeroSection = () => {
     }),
   };
 
-  const name = "Sarah Anderson";
+  const name = "Megha Wadhwa";
 
   return (
     <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">

@@ -1,6 +1,8 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Sparkles, Heart, Code2, Palette, Zap, Coffee } from 'lucide-react';
+import Megha_Profile from './../../assets/Megha_Profile.jpeg'
+import Megha2 from './../../assets/Megha2.png'
 
 const AboutSection = () => {
   const ref = useRef(null);
@@ -52,89 +54,25 @@ const AboutSection = () => {
               />
 
               {/* Main frame with floating animation */}
-              <motion.div 
+              <motion.div
                 className="relative h-full rounded-3xl border border-border/50 bg-card/30 backdrop-blur-sm overflow-hidden"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
               >
                 {/* Abstract constellation art */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <svg viewBox="0 0 200 200" className="w-3/4 h-3/4">
-                    {/* Animated constellation */}
-                    <motion.path
-                      d="M100,20 L150,80 L120,150 L50,130 L80,60 Z"
-                      fill="none"
-                      stroke="url(#gradient1)"
-                      strokeWidth="1"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      animate={isInView ? { pathLength: 1, opacity: 0.8 } : {}}
-                      transition={{ duration: 2, delay: 0.5 }}
-                    />
-                    <motion.path
-                      d="M80,60 L120,150"
-                      fill="none"
-                      stroke="url(#gradient1)"
-                      strokeWidth="0.5"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      animate={isInView ? { pathLength: 1, opacity: 0.5 } : {}}
-                      transition={{ duration: 1.5, delay: 1.5 }}
-                    />
-                    <motion.path
-                      d="M50,130 L150,80"
-                      fill="none"
-                      stroke="url(#gradient1)"
-                      strokeWidth="0.5"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      animate={isInView ? { pathLength: 1, opacity: 0.5 } : {}}
-                      transition={{ duration: 1.5, delay: 1.8 }}
-                    />
-                    
-                    {/* Gradient definition */}
-                    <defs>
-                      <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="hsl(350, 45%, 70%)" />
-                        <stop offset="100%" stopColor="hsl(270, 30%, 60%)" />
-                      </linearGradient>
-                    </defs>
-
-                    {/* Animated nodes */}
-                    {[[100, 20], [150, 80], [120, 150], [50, 130], [80, 60]].map(([cx, cy], i) => (
-                      <motion.g key={i}>
-                        {/* Glow */}
-                        <motion.circle
-                          cx={cx}
-                          cy={cy}
-                          r="8"
-                          fill="hsl(350, 45%, 70%)"
-                          opacity="0.3"
-                          initial={{ scale: 0 }}
-                          animate={isInView ? { 
-                            scale: [1, 1.5, 1],
-                          } : {}}
-                          transition={{ 
-                            scale: { duration: 2, repeat: Infinity, delay: i * 0.3 },
-                          }}
-                        />
-                        {/* Core */}
-                        <motion.circle
-                          cx={cx}
-                          cy={cy}
-                          r="4"
-                          fill="hsl(350, 45%, 70%)"
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                          transition={{ duration: 0.5, delay: 1 + i * 0.2 }}
-                        />
-                      </motion.g>
-                    ))}
-                  </svg>
+                <div className="absolute inset-0 aspect-4/5 flex items-center justify-center">
+                  <img
+                    src={Megha_Profile}
+                    alt="Megha Profile"
+                    className="w-full h-full object-cover rounded-3xl"
+                  />
                 </div>
 
                 {/* Floating orbs */}
                 <motion.div
                   className="absolute top-10 right-10 w-20 h-20 rounded-full bg-primary/10 blur-xl"
-                  animate={{ 
-                    scale: [1, 1.3, 1], 
+                  animate={{
+                    scale: [1, 1.3, 1],
                     opacity: [0.3, 0.6, 0.3],
                     x: [0, 10, 0],
                     y: [0, -10, 0],
@@ -143,8 +81,8 @@ const AboutSection = () => {
                 />
                 <motion.div
                   className="absolute bottom-20 left-10 w-16 h-16 rounded-full bg-secondary/10 blur-xl"
-                  animate={{ 
-                    scale: [1, 1.4, 1], 
+                  animate={{
+                    scale: [1, 1.4, 1],
                     opacity: [0.3, 0.7, 0.3],
                     x: [0, -10, 0],
                     y: [0, 10, 0],
@@ -154,11 +92,11 @@ const AboutSection = () => {
               </motion.div>
 
               {/* Animated corner accents */}
-              <motion.div 
+              <motion.div
                 className="absolute -top-2 -left-2 w-16 h-16 border-l-2 border-t-2 border-primary/40 rounded-tl-3xl"
                 style={{ rotate }}
               />
-              <motion.div 
+              <motion.div
                 className="absolute -bottom-2 -right-2 w-16 h-16 border-r-2 border-b-2 border-secondary/40 rounded-br-3xl"
                 style={{ rotate: useTransform(rotate, v => -v) }}
               />
@@ -203,20 +141,20 @@ const AboutSection = () => {
               transition={{ delay: 0.5 }}
             >
               <p>
-                Hello! I'm a passionate developer who believes that code is an art form. 
-                With over 5 years of experience, I specialize in creating web applications 
+                Hello! I'm a passionate developer who believes that code is an art form.
+                With over 5 years of experience, I specialize in creating web applications
                 that are not just functional, but truly beautiful.
               </p>
               <p>
-                My approach combines technical expertise with an eye for design, ensuring 
-                every project I touch becomes a seamless blend of form and function. 
-                I find joy in the details — the perfect animation, the ideal color palette, 
+                My approach combines technical expertise with an eye for design, ensuring
+                every project I touch becomes a seamless blend of form and function.
+                I find joy in the details — the perfect animation, the ideal color palette,
                 the interaction that delights users.
               </p>
             </motion.div>
 
             {/* Stats row */}
-            <motion.div 
+            <motion.div
               className="flex gap-8 mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -231,7 +169,7 @@ const AboutSection = () => {
                   transition={{ delay: 0.7 + i * 0.1 }}
                   whileHover={{ scale: 1.1, y: -5 }}
                 >
-                  <motion.p 
+                  <motion.p
                     className="text-3xl font-display text-gradient"
                     animate={{ scale: [1, 1.05, 1] }}
                     transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
@@ -251,8 +189,8 @@ const AboutSection = () => {
                   initial={{ opacity: 0, y: 30, rotateX: -15 }}
                   animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
                   transition={{ delay: 0.8 + index * 0.1, type: 'spring' }}
-                  whileHover={{ 
-                    scale: 1.05, 
+                  whileHover={{
+                    scale: 1.05,
                     y: -5,
                     boxShadow: '0 10px 30px -10px hsl(350, 45%, 70%, 0.2)',
                   }}
@@ -262,7 +200,7 @@ const AboutSection = () => {
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity"
                   />
-                  
+
                   <motion.div
                     whileHover={{ rotate: [0, -10, 10, 0] }}
                     transition={{ duration: 0.5 }}
