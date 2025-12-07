@@ -1,5 +1,5 @@
-import { motion, useInView, useMotionValue, useTransform, useSpring } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 
 interface Skill {
   id: string;
@@ -24,116 +24,76 @@ const skills: Skill[] = [
   { id: 'graphql', name: 'GraphQL', level: 82, category: 'backend', icon: '◈' },
 ];
 
-const SkillOrb = ({ skill, index, totalSkills, isInView }: { 
-  skill: Skill; 
-  index: number; 
-  totalSkills: number;
-  isInView: boolean;
-}) => {
+const categoryColors = {
+  frontend: { bg: 'bg-primary/20', border: 'border-primary/40', glow: 'shadow-primary/30' },
+  backend: { bg: 'bg-secondary/20', border: 'border-secondary/40', glow: 'shadow-secondary/30' },
+  tools: { bg: 'bg-accent/20', border: 'border-accent/40', glow: 'shadow-accent/30' },
+  design: { bg: 'bg-lavender/20', border: 'border-lavender/40', glow: 'shadow-lavender/30' },
+};
+
+const SkillBubble = ({ skill, index }: { skill: Skill; index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const orbRef = useRef<HTMLDivElement>(null);
+  const colors = categoryColors[skill.category];
   
-  // Calculate position in a spiral/orbital pattern
-  const angle = (index / totalSkills) * Math.PI * 2;
-  const radius = 120 + (index % 3) * 80;
-  const x = Math.cos(angle) * radius;
-  const y = Math.sin(angle) * radius * 0.6;
-  
-  const categoryColors = {
-    frontend: 'from-primary to-rose-glow',
-    backend: 'from-secondary to-lavender-glow',
-    tools: 'from-accent to-champagne',
-    design: 'from-primary via-secondary to-accent',
-  };
+  // Random movement parameters
+  const randomDuration = 4 + Math.random() * 3;
+  const randomDelayX = Math.random() * 2;
+  const randomDelayY = Math.random() * 2;
+  const moveRangeX = 15 + Math.random() * 20;
+  const moveRangeY = 10 + Math.random() * 15;
 
   return (
     <motion.div
-      ref={orbRef}
-      className="absolute left-1/2 top-1/2 cursor-pointer"
-      initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
-      animate={isInView ? { 
+      className="relative cursor-pointer"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ 
         opacity: 1, 
-        scale: 1, 
-        x: x,
-        y: y,
-      } : {}}
-      transition={{ 
-        duration: 0.8, 
-        delay: index * 0.1,
-        type: 'spring',
-        stiffness: 100,
+        scale: 1,
+        x: [0, moveRangeX, -moveRangeX * 0.5, moveRangeX * 0.7, 0],
+        y: [0, -moveRangeY, moveRangeY * 0.6, -moveRangeY * 0.4, 0],
+      }}
+      transition={{
+        opacity: { duration: 0.5, delay: index * 0.08 },
+        scale: { duration: 0.5, delay: index * 0.08, type: 'spring' },
+        x: { duration: randomDuration, repeat: Infinity, ease: 'easeInOut', delay: randomDelayX },
+        y: { duration: randomDuration * 1.3, repeat: Infinity, ease: 'easeInOut', delay: randomDelayY },
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ transform: 'translate(-50%, -50%)' }}
+      whileHover={{ scale: 1.15, zIndex: 50 }}
     >
+      {/* Glow effect */}
       <motion.div
-        className="relative"
-        animate={isHovered ? { scale: 1.3, zIndex: 50 } : { scale: 1, zIndex: 1 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        className={`absolute inset-0 rounded-2xl blur-xl ${colors.bg}`}
+        animate={{ 
+          opacity: isHovered ? 0.8 : 0.3,
+          scale: isHovered ? 1.3 : 1,
+        }}
+        transition={{ duration: 0.3 }}
+      />
+      
+      {/* Main bubble */}
+      <div className={`relative px-5 py-3 rounded-2xl ${colors.bg} ${colors.border} border backdrop-blur-sm
+        shadow-lg ${isHovered ? colors.glow : ''} transition-shadow duration-300`}
       >
-        {/* Glow effect */}
-        <motion.div
-          className={`absolute inset-0 rounded-full bg-gradient-to-br ${categoryColors[skill.category]} blur-xl`}
-          animate={isHovered ? { opacity: 0.6, scale: 1.5 } : { opacity: 0.2, scale: 1 }}
-          transition={{ duration: 0.3 }}
-          style={{ width: 60 + skill.level * 0.4, height: 60 + skill.level * 0.4 }}
-        />
-        
-        {/* Main orb */}
-        <motion.div
-          className={`relative flex items-center justify-center rounded-full bg-gradient-to-br ${categoryColors[skill.category]} border border-border/30 backdrop-blur-sm`}
-          style={{ 
-            width: 50 + skill.level * 0.3, 
-            height: 50 + skill.level * 0.3,
-          }}
-          animate={{
-            y: [0, -5, 0],
-            rotate: isHovered ? 360 : 0,
-          }}
-          transition={{
-            y: { duration: 3 + index * 0.2, repeat: Infinity, ease: 'easeInOut' },
-            rotate: { duration: 0.5 },
-          }}
-        >
+        <div className="flex items-center gap-3">
           <span className="text-xl">{skill.icon}</span>
-          
-          {/* Orbiting particle */}
-          <motion.div
-            className="absolute w-2 h-2 rounded-full bg-stardust"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-            style={{ 
-              transformOrigin: '25px 25px',
-              top: '50%',
-              left: '50%',
-            }}
-          />
-        </motion.div>
-        
-        {/* Tooltip */}
-        <motion.div
-          className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
-          initial={{ opacity: 0, y: 10 }}
-          animate={isHovered ? { opacity: 1, y: -10, bottom: '100%' } : { opacity: 0, y: 10, bottom: '80%' }}
-          transition={{ duration: 0.2 }}
-        >
-          <div className="bg-card/95 backdrop-blur-xl border border-border/50 rounded-xl px-4 py-3 text-center whitespace-nowrap shadow-lg">
-            <p className="font-display text-foreground text-sm mb-1">{skill.name}</p>
-            
-            {/* Skill level bar */}
-            <div className="w-24 h-1.5 bg-muted rounded-full overflow-hidden">
-              <motion.div
-                className={`h-full rounded-full bg-gradient-to-r ${categoryColors[skill.category]}`}
-                initial={{ width: 0 }}
-                animate={isHovered ? { width: `${skill.level}%` } : { width: 0 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-              />
+          <div>
+            <p className="font-display text-foreground text-sm whitespace-nowrap">{skill.name}</p>
+            <div className="flex items-center gap-2 mt-1">
+              <div className="w-16 h-1 bg-muted/50 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${skill.level}%` }}
+                  transition={{ duration: 1, delay: index * 0.08 + 0.5 }}
+                />
+              </div>
+              <span className="text-xs text-muted-foreground">{skill.level}%</span>
             </div>
-            <p className="text-xs text-muted-foreground mt-1">{skill.level}%</p>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </motion.div>
   );
 };
@@ -157,7 +117,7 @@ const SkillsConstellation = () => {
   return (
     <section id="skills" className="relative py-32 overflow-hidden" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
-        {/* Header with stagger animation */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -186,12 +146,11 @@ const SkillsConstellation = () => {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Explore my universe of skills. Each orb represents a technology I've mastered,
-            orbiting in the constellation of my expertise.
+            Technologies and tools I work with to bring ideas to life
           </motion.p>
         </motion.div>
 
-        {/* Category filters with slide animation */}
+        {/* Category filters */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -200,7 +159,7 @@ const SkillsConstellation = () => {
         >
           <motion.button
             onClick={() => setSelectedCategory(null)}
-            className={`group relative px-5 py-2.5 rounded-full text-sm font-body transition-all duration-500 cursor-pointer overflow-hidden ${
+            className={`group relative px-5 py-2.5 rounded-full text-sm font-body transition-all duration-300 cursor-pointer ${
               !selectedCategory 
                 ? 'bg-primary text-primary-foreground' 
                 : 'bg-card/50 text-muted-foreground hover:text-foreground border border-border/50'
@@ -208,15 +167,7 @@ const SkillsConstellation = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="relative z-10">All Skills</span>
-            {!selectedCategory && (
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary"
-                animate={{ x: ['-100%', '100%'] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                style={{ opacity: 0.3 }}
-              />
-            )}
+            All Skills
           </motion.button>
           
           {categories.map((cat, i) => (
@@ -226,7 +177,7 @@ const SkillsConstellation = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.6 + i * 0.1 }}
-              className={`group px-5 py-2.5 rounded-full text-sm font-body transition-all duration-500 cursor-pointer ${
+              className={`px-5 py-2.5 rounded-full text-sm font-body transition-all duration-300 cursor-pointer ${
                 selectedCategory === cat.id 
                   ? 'bg-primary text-primary-foreground' 
                   : 'bg-card/50 text-muted-foreground hover:text-foreground border border-border/50 hover:border-primary/30'
@@ -240,80 +191,34 @@ const SkillsConstellation = () => {
           ))}
         </motion.div>
 
-        {/* Skills Galaxy Container */}
-        <div className="relative h-[500px] md:h-[600px]">
-          {/* Central glow */}
-          <motion.div
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full"
-            animate={{
-              boxShadow: [
-                '0 0 60px 30px hsl(350, 45%, 70%, 0.2)',
-                '0 0 80px 40px hsl(350, 45%, 70%, 0.3)',
-                '0 0 60px 30px hsl(350, 45%, 70%, 0.2)',
-              ],
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
-          />
-          
-          {/* Center piece */}
-          <motion.div
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            initial={{ scale: 0, rotate: -180 }}
-            animate={isInView ? { scale: 1, rotate: 0 } : {}}
-            transition={{ duration: 1, type: 'spring' }}
-          >
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center">
-              <motion.span 
-                className="text-3xl"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              >
-                ✨
-              </motion.span>
-            </div>
-          </motion.div>
-
-          {/* Orbital rings */}
-          {[150, 230, 310].map((radius, i) => (
-            <motion.div
-              key={i}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-border/20"
-              style={{ width: radius * 2, height: radius * 1.2 }}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 + i * 0.2 }}
-            />
-          ))}
-
-          {/* Skill orbs */}
+        {/* Skills floating grid */}
+        <motion.div 
+          className="flex flex-wrap justify-center gap-4 md:gap-6"
+          layout
+        >
           {filteredSkills.map((skill, index) => (
-            <SkillOrb
-              key={skill.id}
-              skill={skill}
-              index={index}
-              totalSkills={filteredSkills.length}
-              isInView={isInView}
-            />
+            <SkillBubble key={skill.id} skill={skill} index={index} />
           ))}
+        </motion.div>
 
-          {/* Floating particles */}
-          {Array.from({ length: 20 }).map((_, i) => (
+        {/* Decorative floating particles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {Array.from({ length: 15 }).map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 rounded-full bg-stardust/50"
+              className="absolute w-1 h-1 rounded-full bg-primary/30"
               style={{
-                left: `${20 + Math.random() * 60}%`,
-                top: `${20 + Math.random() * 60}%`,
+                left: `${10 + Math.random() * 80}%`,
+                top: `${10 + Math.random() * 80}%`,
               }}
               animate={{
-                y: [0, -30, 0],
-                opacity: [0.2, 0.8, 0.2],
-                scale: [1, 1.5, 1],
+                y: [0, -40, 0],
+                opacity: [0.2, 0.6, 0.2],
               }}
               transition={{
-                duration: 3 + Math.random() * 2,
+                duration: 4 + Math.random() * 3,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: Math.random() * 3,
               }}
             />
           ))}
