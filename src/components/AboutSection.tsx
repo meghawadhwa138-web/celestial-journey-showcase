@@ -129,7 +129,7 @@ const AboutSection = () => {
                 animate={isInView ? { y: 0 } : {}}
                 transition={{ delay: 0.4, duration: 0.8 }}
               >
-                Turning Ideas Into <span className="text-gradient">Elegant</span> Reality
+                Turning Real-World Problems Into <span className="text-gradient">Elegant</span> Solutions
               </motion.h2>
             </div>
 
@@ -141,20 +141,18 @@ const AboutSection = () => {
               transition={{ delay: 0.5 }}
             >
               <p>
-                Hello! I'm a passionate developer who believes that code is an art form.
-                With over 5 years of experience, I specialize in creating web applications
-                that are not just functional, but truly beautiful.
+                I’m a Software Product Engineering student with a strong foundation in full-stack development and UI/UX design. My core strengths include the MERN stack, Next.js, and data structures & algorithms in C++.
               </p>
               <p>
-                My approach combines technical expertise with an eye for design, ensuring
-                every project I touch becomes a seamless blend of form and function.
-                I find joy in the details — the perfect animation, the ideal color palette,
-                the interaction that delights users.
+                During my internship at MediaKind, I contributed to building performant, user-focused features that improved both efficiency and overall product experience. I thrive in environments where innovation meets execution—whether it's solving real-world challenges or collaborating during high-pressure hackathons, where I’ve sharpened my problem-solving, teamwork, and rapid-development skills.
+              </p>
+              <p>
+                I’m currently seeking an internship opportunity where I can apply my technical expertise, learn from industry professionals, and contribute to meaningful, scalable products—while growing into a well-rounded software engineer.
               </p>
             </motion.div>
 
             {/* Stats row */}
-            <motion.div
+            {/* <motion.div
               className="flex gap-8 mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -179,7 +177,7 @@ const AboutSection = () => {
                   <p className="text-xs text-muted-foreground mt-1">{stat.label}</p>
                 </motion.div>
               ))}
-            </motion.div>
+            </motion.div> */}
 
             {/* Highlights Grid with stagger */}
             <div className="grid grid-cols-2 gap-4">

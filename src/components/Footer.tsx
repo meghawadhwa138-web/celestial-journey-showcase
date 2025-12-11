@@ -1,14 +1,15 @@
 import { motion } from 'framer-motion';
 import { Heart, Github, Linkedin, Twitter, Instagram, ArrowUp } from 'lucide-react';
+import { SiLeetcode } from "react-icons/si";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
+    { icon: Github, href: 'https://github.com/megha-wadhwa12', label: 'GitHub', target: '_blank' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/megha-wadhwa-799bb7283', label: 'LinkedIn', target: '_blank' },
+    { icon: SiLeetcode, href: 'https://leetcode.com/u/meghawadhwa20', label: 'Leetcode', target: '_blank' },
+    { icon: Instagram, href: 'https://www.instagram.com/wadhwamegha769', label: 'Instagram', target: '_blank' },
   ];
 
   const scrollToTop = () => {
@@ -46,15 +47,15 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-center md:text-left"
           >
-            <motion.p 
+            <motion.p
               className="font-display text-2xl text-gradient cursor-pointer"
               whileHover={{ scale: 1.05 }}
               onClick={scrollToTop}
             >
-              Sarah Anderson
+              Megha Wadhwa
             </motion.p>
             <p className="text-sm text-muted-foreground mt-1">
-              Creative Developer & Designer
+              Software Developer
             </p>
           </motion.div>
 
@@ -70,6 +71,7 @@ const Footer = () => {
               <motion.a
                 key={social.label}
                 href={social.href}
+                target={social.target}
                 className="group relative p-3 rounded-full text-muted-foreground hover:text-primary transition-all duration-300 overflow-hidden"
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
@@ -99,7 +101,7 @@ const Footer = () => {
             <span>© {currentYear}</span>
             <span>Made with</span>
             <motion.span
-              animate={{ 
+              animate={{
                 scale: [1, 1.3, 1],
                 rotate: [0, -10, 10, 0],
               }}
@@ -123,13 +125,13 @@ const Footer = () => {
             <motion.div
               key={i}
               className="w-1 h-1 rounded-full bg-primary/50"
-              animate={{ 
+              animate={{
                 opacity: [0.3, 1, 0.3],
                 scale: [1, 1.5, 1],
               }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity, 
+              transition={{
+                duration: 2,
+                repeat: Infinity,
                 delay: i * 0.2,
               }}
             />

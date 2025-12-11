@@ -182,13 +182,14 @@ const HeroSection = () => {
           className="flex items-center justify-center gap-6 mb-16"
         >
           {[
-            { icon: Github, href: '#', label: 'GitHub' },
-            { icon: Linkedin, href: '#', label: 'LinkedIn' },
-            { icon: Mail, href: '#contact', label: 'Email' },
+            { icon: Github, href: 'https://github.com/megha-wadhwa12', label: 'GitHub', target: '_blank' },
+            { icon: Linkedin, href: 'https://www.linkedin.com/in/megha-wadhwa-799bb7283', label: 'LinkedIn', target: '_blank' },
+            { icon: Mail, href: 'mailto:meghawadhwa20@gmail.com', label: 'Email', target: '_blank' },
           ].map((social, index) => (
             <motion.a
               key={social.label}
               href={social.href}
+              target={social.target}
               className="group relative p-4 rounded-full border border-border/50 hover:border-primary/50 transition-all duration-300 overflow-hidden"
               whileHover={{ scale: 1.15, rotate: 5 }}
               whileTap={{ scale: 0.95 }}

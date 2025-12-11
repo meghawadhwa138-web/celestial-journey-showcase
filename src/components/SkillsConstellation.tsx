@@ -5,7 +5,7 @@ interface Skill {
   id: string;
   name: string;
   level: number;
-  category: 'frontend' | 'backend' | 'tools' | 'design';
+  category: 'frontend' | 'backend' | 'tools' | 'design' | 'ai';
   icon: string;
 }
 
@@ -22,6 +22,43 @@ const skills: Skill[] = [
   { id: 'docker', name: 'Docker', level: 70, category: 'tools', icon: '🐳' },
   { id: 'aws', name: 'AWS', level: 72, category: 'backend', icon: '☁️' },
   { id: 'graphql', name: 'GraphQL', level: 82, category: 'backend', icon: '◈' },
+  // --- ADD THESE TO YOUR CURRENT ARRAY ---
+
+  // LANGUAGES
+  { id: 'cpp', name: 'C++', level: 90, category: 'backend', icon: '🟦' },
+  { id: 'javascript', name: 'JavaScript', level: 92, category: 'frontend', icon: '🟨' },
+
+  // FRONTEND
+  { id: 'reactnative', name: 'React Native', level: 80, category: 'frontend', icon: '📱' },
+  { id: 'redux', name: 'Redux Toolkit', level: 85, category: 'frontend', icon: '🌀' },
+  { id: 'mui', name: 'Material UI', level: 82, category: 'frontend', icon: '🎛️' },
+  { id: 'shadcn', name: 'Shadcn UI', level: 88, category: 'frontend', icon: '🌗' },
+  { id: 'html', name: 'HTML5', level: 95, category: 'frontend', icon: '📄' },
+  { id: 'css', name: 'CSS3', level: 90, category: 'frontend', icon: '🎀' },
+
+  // BACKEND
+  { id: 'express', name: 'Express.js', level: 80, category: 'backend', icon: '🚀' },
+  { id: 'rest', name: 'REST APIs', level: 88, category: 'backend', icon: '🔗' },
+
+  // DATABASES
+  { id: 'mongodb', name: 'MongoDB', level: 85, category: 'backend', icon: '🍃' },
+  { id: 'mysql', name: 'MySQL', level: 78, category: 'backend', icon: '🐬' },
+
+  // AI / ML
+  { id: 'openai', name: 'OpenAI API', level: 82, category: 'ai', icon: '🤖' },
+  { id: 'rag', name: 'RAG Pipelines', level: 75, category: 'ai', icon: '🧠' },
+  { id: 'chroma', name: 'ChromaDB', level: 70, category: 'ai', icon: '📚' },
+  { id: 'prompt', name: 'Prompt Engineering', level: 85, category: 'ai', icon: '💬' },
+
+  // DEVOPS / CLOUD
+  { id: 'githubactions', name: 'GitHub Actions', level: 78, category: 'tools', icon: '⚙️' },
+  { id: 'vercel', name: 'Vercel', level: 90, category: 'tools', icon: '▲' },
+  { id: 'azure', name: 'Azure', level: 70, category: 'backend', icon: '🔷' },
+
+  // TOOLS
+  { id: 'postman', name: 'Postman', level: 85, category: 'tools', icon: '📮' },
+  { id: 'vscode', name: 'VSCode', level: 95, category: 'tools', icon: '🧩' },
+
 ];
 
 const categoryColors = {
@@ -29,12 +66,13 @@ const categoryColors = {
   backend: { bg: 'bg-secondary/20', border: 'border-secondary/40', glow: 'shadow-secondary/30' },
   tools: { bg: 'bg-accent/20', border: 'border-accent/40', glow: 'shadow-accent/30' },
   design: { bg: 'bg-lavender/20', border: 'border-lavender/40', glow: 'shadow-lavender/30' },
+  ai: { bg: 'bg-lavender/20', border: 'border-lavender/40', glow: 'shadow-lavender/30' },
 };
 
 const SkillBubble = ({ skill, index }: { skill: Skill; index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
   const colors = categoryColors[skill.category];
-  
+
   // Random movement parameters
   const randomDuration = 4 + Math.random() * 3;
   const randomDelayX = Math.random() * 2;
@@ -46,8 +84,8 @@ const SkillBubble = ({ skill, index }: { skill: Skill; index: number }) => {
     <motion.div
       className="relative cursor-pointer"
       initial={{ opacity: 0, scale: 0 }}
-      animate={{ 
-        opacity: 1, 
+      animate={{
+        opacity: 1,
         scale: 1,
         x: [0, moveRangeX, -moveRangeX * 0.5, moveRangeX * 0.7, 0],
         y: [0, -moveRangeY, moveRangeY * 0.6, -moveRangeY * 0.4, 0],
@@ -65,13 +103,13 @@ const SkillBubble = ({ skill, index }: { skill: Skill; index: number }) => {
       {/* Glow effect */}
       <motion.div
         className={`absolute inset-0 rounded-2xl blur-xl ${colors.bg}`}
-        animate={{ 
+        animate={{
           opacity: isHovered ? 0.8 : 0.3,
           scale: isHovered ? 1.3 : 1,
         }}
         transition={{ duration: 0.3 }}
       />
-      
+
       {/* Main bubble */}
       <div className={`relative px-5 py-3 rounded-2xl ${colors.bg} ${colors.border} border backdrop-blur-sm
         shadow-lg ${isHovered ? colors.glow : ''} transition-shadow duration-300`}
@@ -102,7 +140,7 @@ const SkillsConstellation = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  
+
   const categories = [
     { id: 'frontend', label: 'Frontend', emoji: '✨' },
     { id: 'backend', label: 'Backend', emoji: '⚡' },
@@ -110,7 +148,7 @@ const SkillsConstellation = () => {
     { id: 'tools', label: 'Tools', emoji: '🛠️' },
   ];
 
-  const filteredSkills = selectedCategory 
+  const filteredSkills = selectedCategory
     ? skills.filter(s => s.category === selectedCategory)
     : skills;
 
@@ -124,7 +162,7 @@ const SkillsConstellation = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-8"
         >
-          <motion.p 
+          <motion.p
             className="text-primary tracking-[0.3em] uppercase text-sm mb-4"
             initial={{ opacity: 0, letterSpacing: '0.1em' }}
             animate={isInView ? { opacity: 1, letterSpacing: '0.3em' } : {}}
@@ -132,7 +170,7 @@ const SkillsConstellation = () => {
           >
             My Expertise
           </motion.p>
-          <motion.h2 
+          <motion.h2
             className="font-display text-4xl md:text-5xl mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -140,7 +178,7 @@ const SkillsConstellation = () => {
           >
             Skills <span className="text-gradient">Galaxy</span>
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="text-muted-foreground max-w-lg mx-auto"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
@@ -159,17 +197,16 @@ const SkillsConstellation = () => {
         >
           <motion.button
             onClick={() => setSelectedCategory(null)}
-            className={`group relative px-5 py-2.5 rounded-full text-sm font-body transition-all duration-300 cursor-pointer ${
-              !selectedCategory 
-                ? 'bg-primary text-primary-foreground' 
+            className={`group relative px-5 py-2.5 rounded-full text-sm font-body transition-all duration-300 cursor-pointer ${!selectedCategory
+                ? 'bg-primary text-primary-foreground'
                 : 'bg-card/50 text-muted-foreground hover:text-foreground border border-border/50'
-            }`}
+              }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             All Skills
           </motion.button>
-          
+
           {categories.map((cat, i) => (
             <motion.button
               key={cat.id}
@@ -177,11 +214,10 @@ const SkillsConstellation = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.6 + i * 0.1 }}
-              className={`px-5 py-2.5 rounded-full text-sm font-body transition-all duration-300 cursor-pointer ${
-                selectedCategory === cat.id 
-                  ? 'bg-primary text-primary-foreground' 
+              className={`px-5 py-2.5 rounded-full text-sm font-body transition-all duration-300 cursor-pointer ${selectedCategory === cat.id
+                  ? 'bg-primary text-primary-foreground'
                   : 'bg-card/50 text-muted-foreground hover:text-foreground border border-border/50 hover:border-primary/30'
-              }`}
+                }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -192,7 +228,7 @@ const SkillsConstellation = () => {
         </motion.div>
 
         {/* Skills floating grid */}
-        <motion.div 
+        <motion.div
           className="flex flex-wrap justify-center gap-4 md:gap-6"
           layout
         >

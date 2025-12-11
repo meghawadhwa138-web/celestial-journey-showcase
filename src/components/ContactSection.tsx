@@ -36,14 +36,31 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast.success('Message sent successfully!', {
-      description: 'Thank you for reaching out. I\'ll get back to you soon.',
+
+    const data = {
+      access_key: import.meta.env.VITE_Mail_Access_Key,
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+    };
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
     });
-    
-    setFormData({ name: '', email: '', message: '' });
+
+    const result = await response.json();
+
+    if (result.success) {
+      toast.success("Message sent successfully!", {
+        description: "Thank you for reaching out. I’ll get back to you soon.",
+      });
+      setFormData({ name: "", email: "", message: "" });
+    } else {
+      toast.error("Failed to send message.");
+    }
+
     setIsSubmitting(false);
   };
 
@@ -137,7 +154,7 @@ const ContactSection = () => {
 
             <div className="space-y-6 mb-10">
               <motion.a
-                href="mailto:hello@sarahanderson.dev"
+                href="mailto:meghawadhwa20@gmail.com"
                 className="group flex items-center gap-4 p-5 rounded-2xl bg-card/30 border border-border/30 hover:border-primary/40 transition-all duration-500 overflow-hidden relative"
                 whileHover={{ x: 8, scale: 1.02 }}
                 initial={{ opacity: 0, x: -30 }}
@@ -157,7 +174,7 @@ const ContactSection = () => {
                 <div className="flex-1 relative">
                   <p className="text-sm text-muted-foreground">Email</p>
                   <p className="text-foreground group-hover:text-primary transition-colors">
-                    hello@sarahanderson.dev
+                    meghawadhwa20@gmail.com
                   </p>
                 </div>
                 <ArrowUpRight className="relative w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
@@ -179,7 +196,7 @@ const ContactSection = () => {
                 </motion.div>
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="text-foreground">San Francisco, CA</p>
+                  <p className="text-foreground">Rohtak, Haryana</p>
                 </div>
               </motion.div>
             </div>
@@ -204,10 +221,10 @@ const ContactSection = () => {
                 <Sparkles className="w-6 h-6 text-primary mb-4" />
               </motion.div>
               <p className="font-display text-xl text-foreground italic leading-relaxed">
-                "Great design is not just what it looks like, 
-                but how it works and feels."
+                "Clean code is not just what you write, 
+                but how it scales, evolves, and empowers others."   
               </p>
-              <p className="text-primary text-sm mt-4">— Design Philosophy</p>
+              <p className="text-primary text-sm mt-4">—— Software Development Philosophy</p>
             </motion.div>
           </motion.div>
 
