@@ -1,36 +1,51 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Download, Eye, FileText, ExternalLink, Briefcase, GraduationCap, Award, Code } from 'lucide-react';
+import { Download, Eye, ExternalLink, Briefcase, GraduationCap, Award, Code } from 'lucide-react';
 
 const resumeHighlights = [
   {
     icon: Briefcase,
     title: 'Experience',
-    items: ['Software Developer', 'Full Stack Engineer', 'UI/UX Designer'],
+    items: [
+      'Trainee Development Engineer @ MediaKind',
+      'Built multilingual product modules & reusable UI',
+      '20–25% improvement in search UI responsiveness',
+    ],
   },
   {
     icon: GraduationCap,
     title: 'Education',
-    items: ['B.Tech Computer Science', 'Certified Cloud Practitioner'],
+    items: [
+      'B.Tech CSE — Lovely Professional University',
+      'Kalvium UG Program in Software Product Engineering',
+      'Batch: 2023–2027',
+    ],
   },
   {
     icon: Code,
     title: 'Tech Stack',
-    items: ['React, TypeScript, Node.js', 'Python, Java, SQL', 'AWS, Docker, Git'],
+    items: [
+      'React, Next.js, TypeScript, React Native, Flutter',
+      'Node.js, Express.js, MongoDB, MySQL, Firebase',
+      'Docker, Git, Azure DevOps, Vercel, Figma',
+    ],
   },
   {
     icon: Award,
     title: 'Achievements',
-    items: ['Hackathon Winner', 'Open Source Contributor', '5+ Projects Delivered'],
+    items: [
+      '1st Runner-up at HackVerse Hackathon',
+      '7,700+ lines on CodeGen — highest individual contribution',
+      'Led teams & delivered full-stack solutions end-to-end',
+    ],
   },
 ];
 
 const ResumeSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [isHovered, setIsHovered] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
-  // Replace this with your actual resume URL
   const resumeUrl = '/resume.pdf';
 
   return (
@@ -72,15 +87,13 @@ const ResumeSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Resume Preview Card */}
           <motion.div
             className="relative group"
             initial={{ opacity: 0, x: -60 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
           >
             {/* Animated border */}
             <div className="absolute -inset-[2px] rounded-2xl overflow-hidden">
@@ -94,80 +107,59 @@ const ResumeSection = () => {
               />
             </div>
 
-            <div className="relative bg-card rounded-2xl p-8 min-h-[420px] flex flex-col items-center justify-center gap-6">
-              {/* Document icon with animation */}
-              <motion.div
-                className="relative"
-                animate={isHovered ? { y: -10, scale: 1.05 } : { y: 0, scale: 1 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                <div className="w-32 h-40 rounded-lg border-2 border-primary/30 bg-background/50 flex flex-col items-center justify-center relative overflow-hidden">
-                  {/* Document lines */}
-                  {[...Array(6)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="h-1.5 rounded-full bg-muted-foreground/20 mx-4 my-1"
-                      style={{ width: `${60 + Math.random() * 30}%` }}
-                      initial={{ scaleX: 0 }}
-                      animate={isInView ? { scaleX: 1 } : {}}
-                      transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
-                    />
-                  ))}
-                  {/* Corner fold */}
-                  <div className="absolute top-0 right-0 w-6 h-6">
-                    <div className="absolute top-0 right-0 w-0 h-0 border-l-[24px] border-l-transparent border-t-[24px] border-t-primary/20" />
-                  </div>
+            <div className="relative bg-card rounded-2xl p-4 flex flex-col items-center gap-4">
+              {/* Embedded PDF Preview or Placeholder */}
+              {showPreview ? (
+                <div className="w-full rounded-xl overflow-hidden" style={{ height: '500px' }}>
+                  <iframe
+                    src={`${resumeUrl}#toolbar=0&navpanes=0`}
+                    className="w-full h-full border-0 rounded-xl"
+                    title="Resume Preview"
+                  />
                 </div>
-
-                {/* Floating sparkles */}
+              ) : (
                 <motion.div
-                  className="absolute -top-2 -right-2 text-primary"
-                  animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1] }}
-                  transition={{ duration: 3, repeat: Infinity }}
+                  className="w-full rounded-xl bg-background/50 border border-border/50 flex flex-col items-center justify-center cursor-pointer"
+                  style={{ height: '500px' }}
+                  onClick={() => setShowPreview(true)}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
                 >
-                  <FileText size={20} />
+                  <motion.div
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <Eye size={48} className="text-primary/60 mb-4" />
+                  </motion.div>
+                  <p className="text-lg text-foreground">Click to Preview Resume</p>
+                  <p className="text-sm text-muted-foreground font-body mt-1">
+                    Tap to load the embedded PDF viewer
+                  </p>
                 </motion.div>
-              </motion.div>
-
-              <div className="text-center space-y-2">
-                <h3 className="text-2xl text-foreground">Resume Preview</h3>
-                <p className="text-sm text-muted-foreground font-body">
-                  Click below to view or download my full resume
-                </p>
-              </div>
+              )}
 
               {/* Action Buttons */}
-              <div className="flex gap-4 mt-2">
-                <motion.a
-                  href={resumeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 transition-colors font-body text-sm cursor-pointer"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+              <div className="flex gap-4 w-full">
+                <motion.button
+                  onClick={() => setShowPreview(!showPreview)}
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 transition-colors font-body text-sm cursor-pointer"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
                 >
                   <Eye size={16} />
-                  Preview
-                </motion.a>
+                  {showPreview ? 'Hide Preview' : 'Show Preview'}
+                </motion.button>
                 <motion.a
                   href={resumeUrl}
-                  download
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-body text-sm cursor-pointer"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                  download="Megha_Wadhwa_Resume.pdf"
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-body text-sm cursor-pointer"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
                 >
                   <Download size={16} />
                   Download
                 </motion.a>
               </div>
-
-              {/* Hover glow effect */}
-              <motion.div
-                className="absolute inset-0 rounded-2xl pointer-events-none"
-                style={{ boxShadow: 'var(--shadow-rose)' }}
-                animate={{ opacity: isHovered ? 0.5 : 0 }}
-                transition={{ duration: 0.3 }}
-              />
             </div>
           </motion.div>
 
@@ -210,7 +202,7 @@ const ResumeSection = () => {
                           animate={isInView ? { opacity: 1, x: 0 } : {}}
                           transition={{ delay: 0.8 + index * 0.15 + i * 0.1 }}
                         >
-                          <span className="w-1 h-1 rounded-full bg-primary/50" />
+                          <span className="w-1 h-1 rounded-full bg-primary/50 flex-shrink-0" />
                           {item}
                         </motion.p>
                       ))}
