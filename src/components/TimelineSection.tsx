@@ -14,7 +14,7 @@ interface TimelineItem {
 const timelineData: TimelineItem[] = [
   {
     id: 1,
-    year: '2025 — Present',
+    year: 'Feb 2026 — Present',
     title: 'Learning Angular, Rust & PostgreSQL',
     organization: 'Project Offira',
     description: 'Currently expanding my tech stack with Angular, Rust, and PostgreSQL, and applying them hands-on in building Offira.',
@@ -22,7 +22,7 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: 2,
-    year: 'Feb 2025',
+    year: 'Feb 2026',
     title: 'Built Pet Sure',
     organization: 'Personal Project',
     description: 'Developed Pet Sure — a pet care and insurance platform with a focus on user-friendly design and reliable backend services.',
@@ -30,7 +30,7 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: 3,
-    year: 'Dec 2024 – Jan 2025',
+    year: 'Dec 2025 – Jan 2026',
     title: 'Built BugTracker',
     organization: 'Personal Project',
     description: 'Created a full-stack bug tracking app with MERN Stack, JWT auth, Docker, and REST APIs for secure issue management.',
