@@ -41,6 +41,7 @@ const Index = () => {
         <SkillsConstellation />
         <ProjectsSection />
         <TimelineSection />
+        <ResumeSection />
         <ContactSection />
       </main>
 
