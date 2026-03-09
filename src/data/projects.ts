@@ -14,7 +14,10 @@ export interface Project {
   features?: string[];
   challenges?: string[];
   year?: string;
+  featured?: boolean;
 }
+
+export const featuredProjects = () => projects.filter(p => p.featured);
 
 export const projects: Project[] = [
   {
@@ -48,6 +51,7 @@ export const projects: Project[] = [
       'Building a scalable data model for diverse travel content',
     ],
     year: '2024',
+    featured: true,
   },
   {
     id: 2,
@@ -78,6 +82,7 @@ export const projects: Project[] = [
       'Managing conversation context across sessions',
     ],
     year: '2025',
+    featured: true,
   },
   {
     id: 3,
@@ -110,6 +115,7 @@ export const projects: Project[] = [
       'Building cross-platform consistency with React Native',
     ],
     year: '2025',
+    featured: true,
   },
   {
     id: 4,
@@ -141,6 +147,7 @@ export const projects: Project[] = [
       'Optimizing dashboard rendering for real-time updates',
     ],
     year: '2025',
+    featured: true,
   },
   {
     id: 5,
