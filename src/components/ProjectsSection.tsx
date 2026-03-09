@@ -1,8 +1,8 @@
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ExternalLink, Github, ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
-import { projects, type Project } from '@/data/projects';
+import { ExternalLink, Github, ArrowRight, Sparkles } from 'lucide-react';
+import { featuredProjects, type Project } from '@/data/projects';
 
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   const navigate = useNavigate();
@@ -28,42 +28,28 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
       className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-16 items-center mb-32 last:mb-0`}
     >
-      {/* Image container with unique reveal */}
+      {/* Image container */}
       <motion.div
         className="relative w-full lg:w-1/2 aspect-[4/3] group"
         style={{ y: isEven ? y : undefined, rotate: imageRotate }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Animated corner accents */}
         <motion.div
           className="absolute -top-2 -left-2 w-12 h-12 border-l-2 border-t-2 border-primary/40 rounded-tl-xl"
-          animate={{
-            scale: isHovered ? 1.2 : 1,
-            opacity: isHovered ? 1 : 0.5,
-          }}
+          animate={{ scale: isHovered ? 1.2 : 1, opacity: isHovered ? 1 : 0.5 }}
           transition={{ duration: 0.3 }}
         />
         <motion.div
           className="absolute -bottom-2 -right-2 w-12 h-12 border-r-2 border-b-2 border-secondary/40 rounded-br-xl"
-          animate={{
-            scale: isHovered ? 1.2 : 1,
-            opacity: isHovered ? 1 : 0.5,
-          }}
+          animate={{ scale: isHovered ? 1.2 : 1, opacity: isHovered ? 1 : 0.5 }}
           transition={{ duration: 0.3 }}
         />
-
-        {/* Glow effect */}
         <motion.div
           className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 blur-xl"
-          animate={{
-            opacity: isHovered ? 0.8 : 0,
-            scale: isHovered ? 1.1 : 1,
-          }}
+          animate={{ opacity: isHovered ? 0.8 : 0, scale: isHovered ? 1.1 : 1 }}
           transition={{ duration: 0.4 }}
         />
-
-        {/* Main image */}
         <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border/20">
           <motion.img
             src={project.image}
@@ -72,47 +58,29 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             animate={{ scale: isHovered ? 1.1 : 1 }}
             transition={{ duration: 0.6 }}
           />
-
-          {/* Shimmer overlay on hover */}
           <motion.div
             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
             animate={{ x: isHovered ? '200%' : '-100%' }}
             transition={{ duration: 0.8 }}
           />
-
-          {/* Overlay */}
           <motion.div
             className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent"
             animate={{ opacity: isHovered ? 0.7 : 0.4 }}
           />
-
-          {/* Floating number with glow */}
           <motion.div
             className="absolute top-6 left-6 font-display text-7xl"
-            animate={{
-              opacity: isHovered ? 1 : 0.3,
-              scale: isHovered ? 1.1 : 1,
-              textShadow: isHovered ? '0 0 30px hsl(var(--primary))' : 'none',
-            }}
+            animate={{ opacity: isHovered ? 1 : 0.3, scale: isHovered ? 1.1 : 1 }}
             style={{ color: 'hsl(var(--primary) / 0.4)' }}
           >
             0{project.id}
           </motion.div>
-
-          {/* Sparkle decoration */}
           <motion.div
             className="absolute top-4 right-4"
-            animate={{
-              opacity: isHovered ? 1 : 0,
-              rotate: isHovered ? 180 : 0,
-              scale: isHovered ? 1 : 0.5,
-            }}
+            animate={{ opacity: isHovered ? 1 : 0, rotate: isHovered ? 180 : 0, scale: isHovered ? 1 : 0.5 }}
             transition={{ duration: 0.5 }}
           >
             <Sparkles className="w-6 h-6 text-primary" />
           </motion.div>
-
-          {/* Action buttons on hover */}
           <motion.div
             className="absolute bottom-6 right-6 flex gap-3"
             initial={{ opacity: 0, y: 20 }}
@@ -142,10 +110,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       </motion.div>
 
       {/* Content */}
-      <motion.div
-        className="w-full lg:w-1/2 space-y-6"
-        style={{ x: contentX }}
-      >
+      <motion.div className="w-full lg:w-1/2 space-y-6" style={{ x: contentX }}>
         <motion.div
           className="flex items-center gap-4"
           initial={{ opacity: 0, x: isEven ? 50 : -50 }}
@@ -160,7 +125,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
           />
-          <span className="text-primary text-sm tracking-widest uppercase">Project</span>
+          <span className="text-primary text-sm tracking-widest uppercase">Featured</span>
         </motion.div>
 
         <motion.h3
@@ -183,7 +148,6 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           {project.description}
         </motion.p>
 
-        {/* Tags with staggered animation */}
         <motion.div
           className="flex flex-wrap gap-2"
           initial={{ opacity: 0 }}
@@ -206,7 +170,6 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           ))}
         </motion.div>
 
-        {/* View Case Study link */}
         <motion.button
           onClick={() => {
             navigate(`/project/${project.slug}`);
@@ -226,12 +189,6 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           >
             <ArrowRight className="w-4 h-4" />
           </motion.span>
-          <motion.div
-            className="absolute -bottom-1 left-0 h-px bg-gradient-to-r from-primary to-secondary"
-            initial={{ width: 0 }}
-            whileHover={{ width: '100%' }}
-            transition={{ duration: 0.3 }}
-          />
         </motion.button>
       </motion.div>
     </motion.div>
@@ -241,10 +198,8 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 const ProjectsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [showAll, setShowAll] = useState(false);
-
-  const visibleProjects = showAll ? projects : projects.slice(0, 4);
-  const hasMoreProjects = projects.length > 4;
+  const navigate = useNavigate();
+  const featured = featuredProjects();
 
   return (
     <section id="projects" className="relative py-32 overflow-hidden" ref={ref}>
@@ -260,20 +215,10 @@ const ProjectsSection = () => {
           animate={{ x: [50, -50, 50], y: [30, -30, 30] }}
           transition={{ duration: 25, repeat: Infinity }}
         />
-
-        {/* Additional floating orbs */}
-        <motion.div
-          className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-accent/3 blur-2xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
       </div>
 
       <div className="relative max-w-6xl mx-auto px-6">
-        {/* Header with enhanced animations */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
@@ -319,64 +264,47 @@ const ProjectsSection = () => {
           </motion.p>
         </motion.div>
 
-        {/* Projects list with AnimatePresence for smooth transitions */}
+        {/* Featured projects */}
         <div className="space-y-8">
-          <AnimatePresence mode="sync">
-            {visibleProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
-            ))}
-          </AnimatePresence>
+          {featured.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
         </div>
 
         {/* View All Projects button */}
-        {hasMoreProjects && (
-          <motion.div
-            className="flex justify-center mt-20"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+        <motion.div
+          className="flex justify-center mt-20"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <motion.button
+            onClick={() => {
+              navigate('/projects');
+              window.scrollTo(0, 0);
+            }}
+            className="group relative px-8 py-4 rounded-full bg-card/60 border border-border/30 text-foreground overflow-hidden"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <motion.button
-              onClick={() => setShowAll(!showAll)}
-              className="group relative px-8 py-4 rounded-full bg-card/60 border border-border/30 text-foreground overflow-hidden"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              {/* Animated gradient background */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                animate={{ x: ['0%', '100%', '0%'] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-              />
-
-              {/* Border glow on hover */}
-              <motion.div
-                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background: 'linear-gradient(90deg, hsl(var(--primary) / 0.3), hsl(var(--secondary) / 0.3), hsl(var(--primary) / 0.3))',
-                  padding: '1px',
-                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                  WebkitMaskComposite: 'xor',
-                  maskComposite: 'exclude',
-                }}
-              />
-
-              <span className="relative flex items-center gap-3">
-                <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-sm tracking-wide">
-                  {showAll ? 'Show Less' : `View All Projects (${projects.length - 4} more)`}
-                </span>
-                <motion.span
-                  animate={{ rotate: showAll ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDown className="w-4 h-4 text-primary" />
-                </motion.span>
-              </span>
-            </motion.button>
-          </motion.div>
-        )}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              animate={{ x: ['0%', '100%', '0%'] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+            />
+            <span className="relative flex items-center gap-3">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm tracking-wide">View All Projects</span>
+              <motion.span
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <ArrowRight className="w-4 h-4 text-primary" />
+              </motion.span>
+            </span>
+          </motion.button>
+        </motion.div>
       </div>
     </section>
   );
