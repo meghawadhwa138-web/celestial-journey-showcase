@@ -14,7 +14,10 @@ export interface Project {
   features?: string[];
   challenges?: string[];
   year?: string;
+  featured?: boolean;
 }
+
+export const featuredProjects = () => projects.filter(p => p.featured);
 
 export const projects: Project[] = [
   {
