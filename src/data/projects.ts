@@ -82,6 +82,7 @@ export const projects: Project[] = [
       'Managing conversation context across sessions',
     ],
     year: '2025',
+    featured: true,
   },
   {
     id: 3,
