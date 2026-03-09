@@ -51,6 +51,7 @@ export const projects: Project[] = [
       'Building a scalable data model for diverse travel content',
     ],
     year: '2024',
+    featured: true,
   },
   {
     id: 2,
