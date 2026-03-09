@@ -27,6 +27,12 @@ export const projects: Project[] = [
       "RoamIndia is a comprehensive travel planning platform designed specifically for exploring India. The application provides personalized itineraries based on user preferences, detailed city and state guides, curated experiences for solo travelers and families alike, and real-time navigation support. Built with the MERN stack and TypeScript, it delivers a seamless, responsive experience across all devices.",
     tags: ['MongoDB', 'Express JS', 'React', 'Node JS', 'Tailwind CSS', 'Daisy UI', 'TypeScript', 'Mongoose'],
     image: RoamIndia,
+    images: [
+      'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1532664189809-02133fee698d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1585135497273-1a86d9d4f7d2?w=800&h=600&fit=crop',
+    ],
     liveUrl: 'https://roam-india.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/S53_MeghaWadhwa_Capstone_RoamIndia',
     features: [
