@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, ExternalLink, Github, Calendar, Tag, Lightbulb, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { projects } from '@/data/projects';
 import StardustBackground from '@/components/StardustBackground';
+import CustomCursor from '@/components/CustomCursor';
 
 const ProjectCaseStudy = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -24,6 +25,7 @@ const ProjectCaseStudy = () => {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
+      <div className="hidden md:block"><CustomCursor /></div>
       <StardustBackground />
 
       {/* Back Button */}
