@@ -89,6 +89,12 @@ export const projects: Project[] = [
       'Vibe combines emotional wellness tracking with social features in a beautifully designed mobile application. Users log their daily moods, connect with others who share similar emotional states, and receive personalized insights through analytics dashboards. The pastel aesthetic and intuitive UX create a calming, supportive environment.',
     tags: ['React Native', 'TypeScript', 'Firebase', 'Expo'],
     image: 'https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&h=600&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596558450268-9c27524ba856?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=800&h=600&fit=crop',
+    ],
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/Vibe',
     features: [
