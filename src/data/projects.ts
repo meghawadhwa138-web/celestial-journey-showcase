@@ -8,6 +8,7 @@ export interface Project {
   longDescription?: string;
   tags: string[];
   image: string;
+  images?: string[];
   liveUrl: string;
   githubUrl: string;
   features?: string[];
