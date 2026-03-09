@@ -115,6 +115,7 @@ export const projects: Project[] = [
       'Building cross-platform consistency with React Native',
     ],
     year: '2025',
+    featured: true,
   },
   {
     id: 4,
