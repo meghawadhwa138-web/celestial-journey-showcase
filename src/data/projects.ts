@@ -147,6 +147,7 @@ export const projects: Project[] = [
       'Optimizing dashboard rendering for real-time updates',
     ],
     year: '2025',
+    featured: true,
   },
   {
     id: 5,
