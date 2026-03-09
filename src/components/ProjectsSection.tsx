@@ -1,17 +1,8 @@
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ExternalLink, Github, ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
-import RoamIndia from './../../assets/RoamIndia.png'
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  tags: string[];
-  image: string;
-  liveUrl: string;
-  githubUrl: string;
-}
+import { projects, type Project } from '@/data/projects';
 
 // const projects: Project[] = [
 //   {
