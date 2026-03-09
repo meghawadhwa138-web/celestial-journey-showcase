@@ -501,10 +501,12 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           ))}
         </motion.div>
 
-        {/* View project link with enhanced animation */}
-        <motion.a
-          href={project.liveUrl}
-          target='_blank'
+        {/* View Case Study link */}
+        <motion.button
+          onClick={() => {
+            navigate(`/project/${project.slug}`);
+            window.scrollTo(0, 0);
+          }}
           className="inline-flex items-center gap-3 text-primary group cursor-pointer pt-4 relative"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -512,7 +514,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           transition={{ duration: 0.6, delay: 0.7 }}
           whileHover={{ x: 5 }}
         >
-          <span className="text-sm tracking-wide uppercase">View Project</span>
+          <span className="text-sm tracking-wide uppercase">View Case Study</span>
           <motion.span
             animate={{ x: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
@@ -525,7 +527,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             whileHover={{ width: '100%' }}
             transition={{ duration: 0.3 }}
           />
-        </motion.a>
+        </motion.button>
       </motion.div>
     </motion.div>
   );
