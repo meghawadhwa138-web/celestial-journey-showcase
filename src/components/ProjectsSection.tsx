@@ -300,6 +300,7 @@ const projects: Project[] = [
   },
 ];
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const navigate = useNavigate();
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const isEven = index % 2 === 0;
