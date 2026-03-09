@@ -4,6 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { ExternalLink, Github, ArrowRight, ChevronDown, Sparkles } from 'lucide-react';
 import { projects, type Project } from '@/data/projects';
 
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const navigate = useNavigate();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const isEven = index % 2 === 0;
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
