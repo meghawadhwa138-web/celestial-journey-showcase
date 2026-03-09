@@ -8,6 +8,7 @@ export interface Project {
   longDescription?: string;
   tags: string[];
   image: string;
+  images?: string[];
   liveUrl: string;
   githubUrl: string;
   features?: string[];
@@ -26,6 +27,12 @@ export const projects: Project[] = [
       "RoamIndia is a comprehensive travel planning platform designed specifically for exploring India. The application provides personalized itineraries based on user preferences, detailed city and state guides, curated experiences for solo travelers and families alike, and real-time navigation support. Built with the MERN stack and TypeScript, it delivers a seamless, responsive experience across all devices.",
     tags: ['MongoDB', 'Express JS', 'React', 'Node JS', 'Tailwind CSS', 'Daisy UI', 'TypeScript', 'Mongoose'],
     image: RoamIndia,
+    images: [
+      'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1532664189809-02133fee698d?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1585135497273-1a86d9d4f7d2?w=800&h=600&fit=crop',
+    ],
     liveUrl: 'https://roam-india.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/S53_MeghaWadhwa_Capstone_RoamIndia',
     features: [
@@ -52,6 +59,11 @@ export const projects: Project[] = [
       'TriVault leverages the power of Gemini AI and the GOWA WhatsApp API to create an intelligent assistant that lives inside WhatsApp. Users can forward any message to the bot and instantly get summaries, save important notes to a personal vault, or set context-aware reminders — all without leaving the chat interface.',
     tags: ['Next.js', 'Gemini AI API', 'GOWA API'],
     image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1633675254053-d96c7668c3b8?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&h=600&fit=crop',
+    ],
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/TriVault',
     features: [
@@ -77,6 +89,12 @@ export const projects: Project[] = [
       'Vibe combines emotional wellness tracking with social features in a beautifully designed mobile application. Users log their daily moods, connect with others who share similar emotional states, and receive personalized insights through analytics dashboards. The pastel aesthetic and intuitive UX create a calming, supportive environment.',
     tags: ['React Native', 'TypeScript', 'Firebase', 'Expo'],
     image: 'https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&h=600&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596558450268-9c27524ba856?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=800&h=600&fit=crop',
+    ],
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/Vibe',
     features: [
@@ -103,6 +121,11 @@ export const projects: Project[] = [
       'EdgeStream is a sophisticated monitoring system for CDN and streaming infrastructure. It simulates distributed server nodes, collects real-time metrics via WebSockets, and presents them through an interactive dashboard. Features include live latency graphs, cache hit/miss ratios, traffic heatmaps, and automated anomaly detection alerts.',
     tags: ['Node.js', 'Express.js', 'Socket.io', 'MongoDB', 'AWS', 'Next.js', 'Recharts.js', 'Tailwind CSS'],
     image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=600&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=600&fit=crop',
+    ],
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/EdgeStream',
     features: [

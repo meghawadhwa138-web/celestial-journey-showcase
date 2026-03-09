@@ -108,6 +108,41 @@ const ProjectCaseStudy = () => {
             />
           </motion.div>
 
+          {/* Project Gallery */}
+          {project.images && project.images.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="mb-20"
+            >
+              <h2 className="text-2xl md:text-3xl font-display text-foreground mb-8">Project Gallery</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {project.images.map((img, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    whileHover={{ scale: 1.03, y: -4 }}
+                    className={`relative rounded-xl overflow-hidden border border-border/30 ${
+                      i === 0 ? 'col-span-2 row-span-2' : ''
+                    }`}
+                  >
+                    <img
+                      src={img}
+                      alt={`${project.title} screenshot ${i + 1}`}
+                      className="w-full h-full object-cover min-h-[180px]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
           {/* Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
             {/* Main Content */}
