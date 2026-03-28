@@ -34,7 +34,7 @@ const HeroSection = () => {
   const name = "Megha Wadhwa";
 
   return (
-    <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <motion.div 
         className="relative z-10 max-w-5xl mx-auto px-6 text-center"
         style={{ y, opacity, scale }}
