@@ -265,7 +265,7 @@ export const projects: Project[] = [
     longDescription:
       'Built during HackVerse hackathon (1st Runner-up), CodeGen is an AI-powered developer platform. It features an intelligent chatbot for navigating coding concepts, an automated code debugger that identifies and suggests fixes, and a topic searcher for deep-diving into programming subjects. The MERN stack powers a responsive, feature-rich interface.',
     tags: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Generative AI'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: codegen,
     liveUrl: 'https://codegen-phi.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/HackVerseHackathon',
     features: [
