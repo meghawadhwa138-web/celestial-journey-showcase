@@ -361,7 +361,7 @@ export const projects: Project[] = [
     longDescription:
       'A single-page quiz application built with React that presents questions sequentially, captures responses, auto-advances, and calculates scores in real-time. Features include dark/light mode toggle and interactive question components for an engaging user experience.',
     tags: ['React.js', 'JavaScript'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: quizdom,
     liveUrl: 'https://qwisdom.netlify.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/Quizdom-Website',
     features: [
