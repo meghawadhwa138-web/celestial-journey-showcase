@@ -241,7 +241,7 @@ export const projects: Project[] = [
     longDescription:
       'This project tackles the challenge of paginating data across multiple heterogeneous array stores. The custom algorithm fetches data page-by-page, supports filtering based on divisibility criteria, and handles multiple dynamic queries efficiently. It demonstrates strong algorithmic thinking and data structure design.',
     tags: ['C++'],
-    image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&h=600&fit=crop',
+    image: arraystore,
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/DecentralizedArrayStorePagination',
     features: [
