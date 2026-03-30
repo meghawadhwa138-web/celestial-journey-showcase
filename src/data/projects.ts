@@ -19,6 +19,20 @@ import PetSure_PetOwnerProfile from '../../assets/PetSure_PetOwnerProfile.jpeg';
 import PetSure_PetOwnerRequests from '../../assets/PetSure_PetOwnerRequests.jpeg';
 import PetSure_Signup from '../../assets/PetSure_Signup.jpeg';
 import RoamIndia from '../../assets/RoamIndia.png';
+import trivault from '../../assets/trivault.jpg';
+import vibe from '../../assets/vibe.jpg';
+import edgestream from '../../assets/edgestream.jpg';
+import simplishop from '../../assets/simplishop.jpg';
+import supermarket from '../../assets/supermarket.jpg';
+import arraystore from '../../assets/arraystore.jpg';
+import codegen from '../../assets/codegen.jpg';
+import flames from '../../assets/flames.jpg';
+import weirdestfashion from '../../assets/weirdestfashion.jpg';
+import kalviumbooks from '../../assets/kalviumbooks.jpg';
+import quizdom from '../../assets/quizdom.jpg';
+import calculator from '../../assets/calculator.jpg';
+import memegenerator from '../../assets/memegenerator.jpg';
+import flavorfiesta from '../../assets/flavorfiesta.jpg';
 
 export interface Project {
   id: number;
