@@ -337,7 +337,7 @@ export const projects: Project[] = [
     longDescription:
       'Kalvium Books is a React application for managing and displaying a book collection. Built with modern React practices including hooks and reusable components, it features dynamic UI updates, book detail views, and an intuitive management interface.',
     tags: ['React.js', 'Vite'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: kalviumbooks,
     liveUrl: 'https://kalvium-app.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/Kalvium-Books',
     features: [
