@@ -191,7 +191,7 @@ export const projects: Project[] = [
     longDescription:
       'SimpliShop reimagines online shopping by integrating AI at every step. Users describe what they want in natural language, and the system uses OpenAI embeddings with ChromaDB vector search to find semantically similar products. The LLM then structures and ranks recommendations, providing detailed comparisons and alternative suggestions.',
     tags: ['Node.js', 'Express.js', 'Generative AI', 'ChromaDB', 'OpenAI Embeddings', 'AJV', 'Tailwind CSS'],
-    image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=600&fit=crop',
+    image: simplishop,
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/S53_SimpliShop',
     features: [
