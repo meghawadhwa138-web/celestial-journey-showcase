@@ -409,7 +409,7 @@ export const projects: Project[] = [
     longDescription:
       'A React-based meme creation tool where users can load images, add custom text overlays at different positions, and generate shareable memes. Built to practice React fundamentals including state management, event handling, and component composition.',
     tags: ['JavaScript', 'React.js'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: memegenerator,
     liveUrl: 'https://meme-generator-two-iota.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/S53_Megha_Wadhwa_Training_MemeGenerator',
     features: [
