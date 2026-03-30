@@ -217,7 +217,7 @@ export const projects: Project[] = [
     longDescription:
       'A console-based C++ application that simulates the complete workflow of a supermarket inventory system. Built with strong OOP principles, it features modular classes for products, inventory operations, billing workflows, and stock management. The architecture demonstrates clean separation of concerns through well-organized header and source files.',
     tags: ['C++', 'OOPS'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: supermarket,
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/S53_Megha_Wadhwa_OOP_Supermarket_Inventory_Management_Simulation',
     features: [
