@@ -313,7 +313,7 @@ export const projects: Project[] = [
     longDescription:
       'Weirdest Fashion is a community-driven platform celebrating unconventional and creative fashion. Users can browse submissions, upload their own weird fashion finds, and engage with the community. The full-stack application uses React with Chakra UI for a polished frontend and Node.js/Express/MongoDB for robust data management.',
     tags: ['React.js', 'Chakra UI', 'Node.js', 'Express.js', 'MongoDB'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: weirdestfashion,
     liveUrl: 'https://weirdest-fashion.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/S53_Weirdest_Fashion',
     features: [
