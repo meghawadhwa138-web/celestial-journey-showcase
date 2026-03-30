@@ -290,7 +290,7 @@ export const projects: Project[] = [
     longDescription:
       'A fun C++ console application implementing the classic FLAMES game. It takes two names as input, removes common letters, counts unmatched characters, and applies the iterative FLAMES elimination algorithm to predict a playful relationship status. Clean, modular code with proper input validation.',
     tags: ['C++'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: flames,
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/FLAMES',
     features: [
