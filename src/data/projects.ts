@@ -95,7 +95,7 @@ export const projects: Project[] = [
     longDescription:
       'TriVault leverages the power of Gemini AI and the GOWA WhatsApp API to create an intelligent assistant that lives inside WhatsApp. Users can forward any message to the bot and instantly get summaries, save important notes to a personal vault, or set context-aware reminders — all without leaving the chat interface.',
     tags: ['Next.js', 'Gemini AI API', 'GOWA API'],
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop',
+    image: trivault,
     images: [
       'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1633675254053-d96c7668c3b8?w=800&h=600&fit=crop',
