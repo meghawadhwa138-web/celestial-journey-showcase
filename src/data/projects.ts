@@ -159,7 +159,7 @@ export const projects: Project[] = [
     longDescription:
       'EdgeStream is a sophisticated monitoring system for CDN and streaming infrastructure. It simulates distributed server nodes, collects real-time metrics via WebSockets, and presents them through an interactive dashboard. Features include live latency graphs, cache hit/miss ratios, traffic heatmaps, and automated anomaly detection alerts.',
     tags: ['Node.js', 'Express.js', 'Socket.io', 'MongoDB', 'AWS', 'Next.js', 'Recharts.js', 'Tailwind CSS'],
-    image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=600&fit=crop',
+    image: edgestream,
     images: [
       'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
