@@ -19,6 +19,20 @@ import PetSure_PetOwnerProfile from '../../assets/PetSure_PetOwnerProfile.jpeg';
 import PetSure_PetOwnerRequests from '../../assets/PetSure_PetOwnerRequests.jpeg';
 import PetSure_Signup from '../../assets/PetSure_Signup.jpeg';
 import RoamIndia from '../../assets/RoamIndia.png';
+import trivault from '../../assets/trivault.jpg';
+import vibe from '../../assets/vibe.jpg';
+import edgestream from '../../assets/edgestream.jpg';
+import simplishop from '../../assets/simplishop.jpg';
+import supermarket from '../../assets/supermarket.jpg';
+import arraystore from '../../assets/arraystore.jpg';
+import codegen from '../../assets/codegen.jpg';
+import flames from '../../assets/flames.jpg';
+import weirdestfashion from '../../assets/weirdestfashion.jpg';
+import kalviumbooks from '../../assets/kalviumbooks.jpg';
+import quizdom from '../../assets/quizdom.jpg';
+import calculator from '../../assets/calculator.jpg';
+import memegenerator from '../../assets/memegenerator.jpg';
+import flavorfiesta from '../../assets/flavorfiesta.jpg';
 
 export interface Project {
   id: number;
@@ -81,7 +95,7 @@ export const projects: Project[] = [
     longDescription:
       'TriVault leverages the power of Gemini AI and the GOWA WhatsApp API to create an intelligent assistant that lives inside WhatsApp. Users can forward any message to the bot and instantly get summaries, save important notes to a personal vault, or set context-aware reminders — all without leaving the chat interface.',
     tags: ['Next.js', 'Gemini AI API', 'GOWA API'],
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop',
+    image: trivault,
     images: [
       'https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1633675254053-d96c7668c3b8?w=800&h=600&fit=crop',
@@ -112,7 +126,7 @@ export const projects: Project[] = [
     longDescription:
       'Vibe combines emotional wellness tracking with social features in a beautifully designed mobile application. Users log their daily moods, connect with others who share similar emotional states, and receive personalized insights through analytics dashboards. The pastel aesthetic and intuitive UX create a calming, supportive environment.',
     tags: ['React Native', 'TypeScript', 'Firebase', 'Expo'],
-    image: 'https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&h=600&fit=crop',
+    image: vibe,
     images: [
       'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1596558450268-9c27524ba856?w=800&h=600&fit=crop',
@@ -145,7 +159,7 @@ export const projects: Project[] = [
     longDescription:
       'EdgeStream is a sophisticated monitoring system for CDN and streaming infrastructure. It simulates distributed server nodes, collects real-time metrics via WebSockets, and presents them through an interactive dashboard. Features include live latency graphs, cache hit/miss ratios, traffic heatmaps, and automated anomaly detection alerts.',
     tags: ['Node.js', 'Express.js', 'Socket.io', 'MongoDB', 'AWS', 'Next.js', 'Recharts.js', 'Tailwind CSS'],
-    image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=600&fit=crop',
+    image: edgestream,
     images: [
       'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
@@ -177,7 +191,7 @@ export const projects: Project[] = [
     longDescription:
       'SimpliShop reimagines online shopping by integrating AI at every step. Users describe what they want in natural language, and the system uses OpenAI embeddings with ChromaDB vector search to find semantically similar products. The LLM then structures and ranks recommendations, providing detailed comparisons and alternative suggestions.',
     tags: ['Node.js', 'Express.js', 'Generative AI', 'ChromaDB', 'OpenAI Embeddings', 'AJV', 'Tailwind CSS'],
-    image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=600&fit=crop',
+    image: simplishop,
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/S53_SimpliShop',
     features: [
@@ -203,7 +217,7 @@ export const projects: Project[] = [
     longDescription:
       'A console-based C++ application that simulates the complete workflow of a supermarket inventory system. Built with strong OOP principles, it features modular classes for products, inventory operations, billing workflows, and stock management. The architecture demonstrates clean separation of concerns through well-organized header and source files.',
     tags: ['C++', 'OOPS'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: supermarket,
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/S53_Megha_Wadhwa_OOP_Supermarket_Inventory_Management_Simulation',
     features: [
@@ -227,7 +241,7 @@ export const projects: Project[] = [
     longDescription:
       'This project tackles the challenge of paginating data across multiple heterogeneous array stores. The custom algorithm fetches data page-by-page, supports filtering based on divisibility criteria, and handles multiple dynamic queries efficiently. It demonstrates strong algorithmic thinking and data structure design.',
     tags: ['C++'],
-    image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&h=600&fit=crop',
+    image: arraystore,
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/DecentralizedArrayStorePagination',
     features: [
@@ -251,7 +265,7 @@ export const projects: Project[] = [
     longDescription:
       'Built during HackVerse hackathon (1st Runner-up), CodeGen is an AI-powered developer platform. It features an intelligent chatbot for navigating coding concepts, an automated code debugger that identifies and suggests fixes, and a topic searcher for deep-diving into programming subjects. The MERN stack powers a responsive, feature-rich interface.',
     tags: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Generative AI'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: codegen,
     liveUrl: 'https://codegen-phi.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/HackVerseHackathon',
     features: [
@@ -276,7 +290,7 @@ export const projects: Project[] = [
     longDescription:
       'A fun C++ console application implementing the classic FLAMES game. It takes two names as input, removes common letters, counts unmatched characters, and applies the iterative FLAMES elimination algorithm to predict a playful relationship status. Clean, modular code with proper input validation.',
     tags: ['C++'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: flames,
     liveUrl: '#',
     githubUrl: 'https://github.com/megha-wadhwa12/FLAMES',
     features: [
@@ -299,7 +313,7 @@ export const projects: Project[] = [
     longDescription:
       'Weirdest Fashion is a community-driven platform celebrating unconventional and creative fashion. Users can browse submissions, upload their own weird fashion finds, and engage with the community. The full-stack application uses React with Chakra UI for a polished frontend and Node.js/Express/MongoDB for robust data management.',
     tags: ['React.js', 'Chakra UI', 'Node.js', 'Express.js', 'MongoDB'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: weirdestfashion,
     liveUrl: 'https://weirdest-fashion.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/S53_Weirdest_Fashion',
     features: [
@@ -323,7 +337,7 @@ export const projects: Project[] = [
     longDescription:
       'Kalvium Books is a React application for managing and displaying a book collection. Built with modern React practices including hooks and reusable components, it features dynamic UI updates, book detail views, and an intuitive management interface.',
     tags: ['React.js', 'Vite'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: kalviumbooks,
     liveUrl: 'https://kalvium-app.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/Kalvium-Books',
     features: [
@@ -347,7 +361,7 @@ export const projects: Project[] = [
     longDescription:
       'A single-page quiz application built with React that presents questions sequentially, captures responses, auto-advances, and calculates scores in real-time. Features include dark/light mode toggle and interactive question components for an engaging user experience.',
     tags: ['React.js', 'JavaScript'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: quizdom,
     liveUrl: 'https://qwisdom.netlify.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/Quizdom-Website',
     features: [
@@ -371,7 +385,7 @@ export const projects: Project[] = [
     longDescription:
       'A React-based calculator application featuring modular components for display, buttons, and input handling. Supports addition, subtraction, multiplication, and division with clean state management and smooth user interactions.',
     tags: ['React.js', 'JavaScript'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: calculator,
     liveUrl: 'https://calculator-app-three-iota.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/code-along-react-calculator-boilerplate',
     features: [
@@ -395,7 +409,7 @@ export const projects: Project[] = [
     longDescription:
       'A React-based meme creation tool where users can load images, add custom text overlays at different positions, and generate shareable memes. Built to practice React fundamentals including state management, event handling, and component composition.',
     tags: ['JavaScript', 'React.js'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: memegenerator,
     liveUrl: 'https://meme-generator-two-iota.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/S53_Megha_Wadhwa_Training_MemeGenerator',
     features: [
@@ -419,7 +433,7 @@ export const projects: Project[] = [
     longDescription:
       'A visually appealing food and recipe exploration platform built with React. Users can browse restaurant-style menu items, view detailed recipe instructions, and enjoy a responsive interface designed to delight food enthusiasts.',
     tags: ['React.js'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: flavorfiesta,
     liveUrl: 'https://megha-wadhwa12.github.io/Flavor-Fiesta/',
     githubUrl: 'https://github.com/megha-wadhwa12/Flavor-Fiesta',
     features: [
