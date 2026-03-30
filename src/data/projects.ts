@@ -1,3 +1,23 @@
+import bug1 from '../../assets/bug1.png';
+import bug2 from '../../assets/bug2.png';
+import bug3 from '../../assets/bug3.png';
+import bug4 from '../../assets/bug4.png';
+import HA1 from '../../assets/HA1.png';
+import HA2 from '../../assets/HA2.png';
+import HA3 from '../../assets/HA3.png';
+import HA4 from '../../assets/HA4.png';
+import HA5 from '../../assets/HA5.png';
+import HA6 from '../../assets/HA6.png';
+import PetSure_CaregiverDashboard from '../../assets/PetSure_CaregiverDashboard.jpeg';
+import PetSure_CaregiverInvites from '../../assets/PetSure_CaregiverInvites.jpeg';
+import PetSure_CaregiverProfile from '../../assets/PetSure_CaregiverProfile.jpeg';
+import PetSure_CaregiverRequests from '../../assets/PetSure_CaregiverRequests.jpeg';
+import PetSure_Login from '../../assets/PetSure_Login.jpeg';
+import PetSure_Onboarding from '../../assets/PetSure_Onboarding.png'
+import PetSure_PetOwnerDashboard from '../../assets/PetSure_PetOwnerDashboard.jpeg';
+import PetSure_PetOwnerProfile from '../../assets/PetSure_PetOwnerProfile.jpeg';
+import PetSure_PetOwnerRequests from '../../assets/PetSure_PetOwnerRequests.jpeg';
+import PetSure_Signup from '../../assets/PetSure_Signup.jpeg';
 import RoamIndia from '../../assets/RoamIndia.png';
 
 export interface Project {
@@ -34,7 +54,6 @@ export const projects: Project[] = [
       'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1506461883276-594a12b11cf3?w=800&h=600&fit=crop',
       'https://images.unsplash.com/photo-1532664189809-02133fee698d?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1585135497273-1a86d9d4f7d2?w=800&h=600&fit=crop',
     ],
     liveUrl: 'https://roam-india.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/S53_MeghaWadhwa_Capstone_RoamIndia',
@@ -415,4 +434,120 @@ export const projects: Project[] = [
     ],
     year: '2024',
   },
+  {
+    id: 16,
+    title: 'BugTracker',
+    slug: 'bugtracker',
+    description:
+      'A full-stack bug tracking system with secure authentication and scalable APIs, enabling teams to efficiently manage issues, track progress, and streamline debugging workflows.',
+    longDescription:
+      'BugTracker is a full-stack issue tracking platform designed to help developers and teams manage bugs and tasks efficiently. It supports secure authentication using JWT, allowing users to create, assign, and track issues across different stages of development. The system features dynamic dashboards, status-based filtering, and a scalable backend built with Node.js and Express. Designed using the MERN stack, the application ensures efficient state management, optimized API communication, and a responsive user interface for seamless user experience.',
+    tags: [
+      'MongoDB',
+      'Express JS',
+      'React',
+      'Node JS',
+      'Mongoose',
+      'JWT Auth',
+      'REST APIs',
+      'Tailwind CSS',
+      'Docker',
+      'Vercel'
+    ],
+    image: bug1,
+    images: [bug1, bug2, bug3, bug4],
+    liveUrl: 'https://bug-track-pro.vercel.app/',
+    githubUrl: 'https://github.com/megha-wadhwa12/BugTracker',
+    features: [
+      'Implemented JWT-based authentication with protected routes and secure session handling',
+      'Designed RESTful APIs for managing bug lifecycle including creation, assignment, and status updates',
+      'Built dynamic dashboards with filtering based on bug status, priority, and ownership',
+      'Structured scalable MongoDB schemas using Mongoose for efficient data handling',
+      'Developed responsive UI using React and Tailwind CSS for smooth user experience',
+      'Containerized the application using Docker for consistent deployment environments'
+    ],
+    challenges: [
+      'Designing a scalable data model to handle bug states, assignments, and relationships efficiently',
+      'Implementing secure authentication and route protection using JWT',
+      'Managing state synchronization between frontend and backend for real-time updates',
+      'Optimizing API performance and handling edge cases in bug lifecycle transitions'
+    ],
+    year: '2025',
+    featured: true,
+  },
+  {
+    id: 17,
+    title: 'Hiring Analytics System',
+    slug: 'hiring-analytics',
+    description:
+      'A CLI-based hiring analytics system that simulates an end-to-end recruitment pipeline and generates actionable insights using SQL-based data analysis.',
+    longDescription:
+      'The Hiring Analytics System is a command-line application designed to simulate and analyze a complete recruitment pipeline. It enables tracking of candidates across multiple hiring stages such as Applied, Screening, Interview, and Hired/Rejected. Built using Python and SQLite, the system processes structured data and performs SQL-based transformations to generate insights like funnel drop-offs, hiring success ratio, interviewer performance, and average time to hire. The project demonstrates strong understanding of ETL concepts, data validation, and analytical reporting using real-world hiring workflows.',
+    tags: [
+      'Python',
+      'SQLite',
+      'SQL',
+      'Data Analysis',
+      'ETL',
+      'Data Cleaning',
+      'CLI Application'
+    ],
+    image: HA1,
+    images: [HA1, HA2, HA3, HA4, HA5, HA6],
+    liveUrl: '', // no demo
+    githubUrl: 'https://github.com/megha-wadhwa12/Hiring_analytics',
+    features: [
+      'Built a CLI-based system to manage candidates across multiple hiring stages',
+      'Implemented SQL queries (JOIN, GROUP BY, aggregations) to generate analytics reports',
+      'Tracked candidate funnel with stage-wise transitions and drop-off analysis',
+      'Calculated hiring success ratio and average time-to-hire metrics',
+      'Analyzed interviewer performance based on candidate outcomes',
+      'Ensured data quality using validation checks and structured data storage'
+    ],
+    challenges: [
+      'Designing a stage-wise pipeline model to accurately represent real-world hiring workflows',
+      'Writing optimized SQL queries for aggregations and analytical reporting',
+      'Handling data consistency and validation across multiple candidate stages',
+      'Simulating realistic hiring scenarios using structured datasets for meaningful insights'
+    ],
+    year: '2026',
+    featured: true,
+  },
+  {
+    id: 18,
+    title: 'PetSure',
+    slug: 'petsure',
+    description:
+      'A mobile application for pet care and management, enabling users to track pet health, manage appointments, and ensure better care using a seamless Flutter-based interface.',
+    longDescription:
+      'PetSure is a cross-platform mobile application built using Flutter and Firebase, designed to simplify pet care management for pet owners. The app allows users to manage pet profiles, track health records, schedule appointments, and receive timely reminders for vaccinations and checkups. Firebase is used for real-time data storage and authentication, ensuring secure and scalable backend operations. The application focuses on delivering a smooth user experience with responsive UI components and efficient state management across devices.',
+    tags: [
+      'Flutter',
+      'Dart',
+      'Firebase',
+      'Firestore',
+      'Authentication',
+      'Mobile Development',
+      'Real-time Database'
+    ],
+    image: PetSure_Onboarding,
+    images: [PetSure_CaregiverDashboard, PetSure_CaregiverInvites, PetSure_CaregiverProfile, PetSure_Login, PetSure_PetOwnerProfile, PetSure_PetOwnerRequests, PetSure_Signup, PetSure_CaregiverRequests],
+    liveUrl: null, // no live demo
+    githubUrl: 'https://github.com/kalviumcommunity/S53-Jan2026-S53-Team-01-Flutter-Firebase-PetSure',
+    features: [
+      'Developed a cross-platform mobile app using Flutter for seamless performance on Android and iOS',
+      'Implemented Firebase Authentication for secure user login and session management',
+      'Designed real-time data handling using Firestore for pet profiles and health records',
+      'Enabled appointment scheduling and reminder-based workflows for pet care',
+      'Built responsive and user-friendly UI with smooth navigation and state management'
+    ],
+    challenges: [
+      'Managing real-time data synchronization between Firebase and the mobile UI',
+      'Designing an intuitive user flow for handling multiple pet profiles and records',
+      'Handling state management efficiently in a Flutter-based application',
+      'Ensuring secure authentication and consistent data updates across sessions'
+    ],
+    year: '2026',
+    featured: true,
+  }
 ];

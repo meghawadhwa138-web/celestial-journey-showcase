@@ -1,72 +1,84 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Skill {
   id: string;
   name: string;
   level: number;
-  category: 'frontend' | 'backend' | 'tools' | 'design' | 'ai';
+  category: 'frontend' | 'backend' | 'data' | 'cloud' | 'tools' | 'design';
   icon: string;
 }
 
 const skills: Skill[] = [
-  { id: 'react', name: 'React', level: 95, category: 'frontend', icon: '⚛️' },
-  { id: 'typescript', name: 'TypeScript', level: 90, category: 'frontend', icon: '📘' },
-  { id: 'nextjs', name: 'Next.js', level: 85, category: 'frontend', icon: '▲' },
-  { id: 'tailwind', name: 'Tailwind', level: 92, category: 'frontend', icon: '🎨' },
-  { id: 'nodejs', name: 'Node.js', level: 80, category: 'backend', icon: '💚' },
-  { id: 'python', name: 'Python', level: 75, category: 'backend', icon: '🐍' },
-  { id: 'postgresql', name: 'PostgreSQL', level: 78, category: 'backend', icon: '🐘' },
-  { id: 'figma', name: 'Figma', level: 88, category: 'design', icon: '🎯' },
-  { id: 'git', name: 'Git', level: 85, category: 'tools', icon: '📦' },
-  { id: 'docker', name: 'Docker', level: 70, category: 'tools', icon: '🐳' },
-  { id: 'aws', name: 'AWS', level: 72, category: 'backend', icon: '☁️' },
-  { id: 'graphql', name: 'GraphQL', level: 82, category: 'backend', icon: '◈' },
-  // --- ADD THESE TO YOUR CURRENT ARRAY ---
-
-  // LANGUAGES
+  // ===== LANGUAGES =====
   { id: 'cpp', name: 'C++', level: 90, category: 'backend', icon: '🟦' },
   { id: 'javascript', name: 'JavaScript', level: 92, category: 'frontend', icon: '🟨' },
+  { id: 'typescript', name: 'TypeScript', level: 90, category: 'frontend', icon: '📘' },
+  { id: 'python', name: 'Python', level: 80, category: 'backend', icon: '🐍' },
+  { id: 'dart', name: 'Dart', level: 75, category: 'frontend', icon: '🎯' },
+  { id: 'rust', name: 'Rust', level: 70, category: 'backend', icon: '🦀' },
 
-  // FRONTEND
+  // ===== FRONTEND =====
+  { id: 'react', name: 'React', level: 90, category: 'frontend', icon: '⚛️' },
+  { id: 'nextjs', name: 'Next.js', level: 88, category: 'frontend', icon: '▲' },
   { id: 'reactnative', name: 'React Native', level: 80, category: 'frontend', icon: '📱' },
+  { id: 'flutter', name: 'Flutter', level: 80, category: 'frontend', icon: '💙' },
   { id: 'redux', name: 'Redux Toolkit', level: 85, category: 'frontend', icon: '🌀' },
+  { id: 'tailwind', name: 'Tailwind CSS', level: 92, category: 'frontend', icon: '🎨' },
   { id: 'mui', name: 'Material UI', level: 82, category: 'frontend', icon: '🎛️' },
   { id: 'shadcn', name: 'Shadcn UI', level: 88, category: 'frontend', icon: '🌗' },
   { id: 'html', name: 'HTML5', level: 95, category: 'frontend', icon: '📄' },
   { id: 'css', name: 'CSS3', level: 90, category: 'frontend', icon: '🎀' },
 
-  // BACKEND
-  { id: 'express', name: 'Express.js', level: 80, category: 'backend', icon: '🚀' },
+  // ===== BACKEND =====
+  { id: 'nodejs', name: 'Node.js', level: 85, category: 'backend', icon: '💚' },
+  { id: 'express', name: 'Express.js', level: 82, category: 'backend', icon: '🚀' },
   { id: 'rest', name: 'REST APIs', level: 88, category: 'backend', icon: '🔗' },
+  { id: 'graphql', name: 'GraphQL', level: 80, category: 'backend', icon: '◈' },
+  { id: 'jwt', name: 'JWT Auth', level: 85, category: 'backend', icon: '🔐' },
+  { id: 'mongoose', name: 'Mongoose', level: 82, category: 'backend', icon: '🍃' },
+  { id: 'axum', name: 'Axum', level: 65, category: 'backend', icon: '⚡' },
 
-  // DATABASES
+  // ===== DATABASES =====
+  { id: 'postgresql', name: 'PostgreSQL', level: 80, category: 'backend', icon: '🐘' },
   { id: 'mongodb', name: 'MongoDB', level: 85, category: 'backend', icon: '🍃' },
   { id: 'mysql', name: 'MySQL', level: 78, category: 'backend', icon: '🐬' },
+  { id: 'firebase', name: 'Firebase', level: 75, category: 'backend', icon: '🔥' },
+  { id: 'sqlite', name: 'SQLite', level: 78, category: 'backend', icon: '📁' },
 
-  // AI / ML
-  { id: 'openai', name: 'OpenAI API', level: 82, category: 'ai', icon: '🤖' },
-  { id: 'rag', name: 'RAG Pipelines', level: 75, category: 'ai', icon: '🧠' },
-  { id: 'chroma', name: 'ChromaDB', level: 70, category: 'ai', icon: '📚' },
-  { id: 'prompt', name: 'Prompt Engineering', level: 85, category: 'ai', icon: '💬' },
+  // ===== DATA / ANALYTICS =====
+  { id: 'pandas', name: 'Pandas', level: 85, category: 'data', icon: '📊' },
+  { id: 'numpy', name: 'NumPy', level: 80, category: 'data', icon: '🔢' },
+  { id: 'eda', name: 'EDA', level: 85, category: 'data', icon: '📈' },
+  { id: 'matplotlib', name: 'Matplotlib', level: 80, category: 'data', icon: '📉' },
+  { id: 'seaborn', name: 'Seaborn', level: 78, category: 'data', icon: '🌊' },
+  { id: 'etl', name: 'ETL Pipelines', level: 82, category: 'data', icon: '⚙️' },
+  { id: 'datacleaning', name: 'Data Cleaning', level: 85, category: 'data', icon: '🧹' },
 
-  // DEVOPS / CLOUD
+  // ===== CLOUD =====
+  { id: 'gcp', name: 'Google Cloud Platform', level: 75, category: 'cloud', icon: '☁️' },
+  { id: 'bigquery', name: 'BigQuery', level: 70, category: 'cloud', icon: '📊' },
+  { id: 'cloudstorage', name: 'Cloud Storage', level: 72, category: 'cloud', icon: '🗄️' },
+  { id: 'iam', name: 'IAM', level: 65, category: 'cloud', icon: '🔐' },
+  { id: 'azure', name: 'Azure', level: 70, category: 'cloud', icon: '🔷' },
+
+  // ===== TOOLS =====
+  { id: 'git', name: 'Git', level: 85, category: 'tools', icon: '📦' },
   { id: 'githubactions', name: 'GitHub Actions', level: 78, category: 'tools', icon: '⚙️' },
-  { id: 'vercel', name: 'Vercel', level: 90, category: 'tools', icon: '▲' },
-  { id: 'azure', name: 'Azure', level: 70, category: 'backend', icon: '🔷' },
-
-  // TOOLS
+  { id: 'docker', name: 'Docker', level: 75, category: 'tools', icon: '🐳' },
   { id: 'postman', name: 'Postman', level: 85, category: 'tools', icon: '📮' },
   { id: 'vscode', name: 'VSCode', level: 95, category: 'tools', icon: '🧩' },
-
+  { id: 'vercel', name: 'Vercel', level: 90, category: 'tools', icon: '▲' },
+  { id: 'figma', name: 'Figma', level: 88, category: 'design', icon: '🎯' },
 ];
 
 const categoryColors = {
   frontend: { bg: 'bg-primary/20', border: 'border-primary/40', glow: 'shadow-primary/30' },
   backend: { bg: 'bg-secondary/20', border: 'border-secondary/40', glow: 'shadow-secondary/30' },
+  data: { bg: 'bg-pink-500/20', border: 'border-green-500/40', glow: 'shadow-green-500/30' },
+  cloud: { bg: 'bg-sky-500/20', border: 'border-sky-500/40', glow: 'shadow-sky-500/30' },
   tools: { bg: 'bg-accent/20', border: 'border-accent/40', glow: 'shadow-accent/30' },
   design: { bg: 'bg-lavender/20', border: 'border-lavender/40', glow: 'shadow-lavender/30' },
-  ai: { bg: 'bg-lavender/20', border: 'border-lavender/40', glow: 'shadow-lavender/30' },
 };
 
 const SkillBubble = ({ skill, index }: { skill: Skill; index: number }) => {
@@ -144,8 +156,10 @@ const SkillsConstellation = () => {
   const categories = [
     { id: 'frontend', label: 'Frontend', emoji: '✨' },
     { id: 'backend', label: 'Backend', emoji: '⚡' },
-    { id: 'design', label: 'Design', emoji: '🎨' },
+    { id: 'data', label: 'Data', emoji: '📊' },
+    { id: 'cloud', label: 'Cloud', emoji: '☁️' },
     { id: 'tools', label: 'Tools', emoji: '🛠️' },
+    { id: 'design', label: 'Design', emoji: '🎨' },
   ];
 
   const filteredSkills = selectedCategory
@@ -198,8 +212,8 @@ const SkillsConstellation = () => {
           <motion.button
             onClick={() => setSelectedCategory(null)}
             className={`group relative px-5 py-2.5 rounded-full text-sm font-body transition-all duration-300 cursor-pointer ${!selectedCategory
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-card/50 text-muted-foreground hover:text-foreground border border-border/50'
+              ? 'bg-primary text-primary-foreground'
+              : 'bg-card/50 text-muted-foreground hover:text-foreground border border-border/50'
               }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -215,8 +229,8 @@ const SkillsConstellation = () => {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.6 + i * 0.1 }}
               className={`px-5 py-2.5 rounded-full text-sm font-body transition-all duration-300 cursor-pointer ${selectedCategory === cat.id
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-card/50 text-muted-foreground hover:text-foreground border border-border/50 hover:border-primary/30'
+                ? 'bg-primary text-primary-foreground'
+                : 'bg-card/50 text-muted-foreground hover:text-foreground border border-border/50 hover:border-primary/30'
                 }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
