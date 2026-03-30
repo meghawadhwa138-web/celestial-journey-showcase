@@ -385,7 +385,7 @@ export const projects: Project[] = [
     longDescription:
       'A React-based calculator application featuring modular components for display, buttons, and input handling. Supports addition, subtraction, multiplication, and division with clean state management and smooth user interactions.',
     tags: ['React.js', 'JavaScript'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: calculator,
     liveUrl: 'https://calculator-app-three-iota.vercel.app/',
     githubUrl: 'https://github.com/megha-wadhwa12/code-along-react-calculator-boilerplate',
     features: [
