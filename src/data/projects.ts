@@ -433,7 +433,7 @@ export const projects: Project[] = [
     longDescription:
       'A visually appealing food and recipe exploration platform built with React. Users can browse restaurant-style menu items, view detailed recipe instructions, and enjoy a responsive interface designed to delight food enthusiasts.',
     tags: ['React.js'],
-    image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&h=600&fit=crop',
+    image: flavorfiesta,
     liveUrl: 'https://megha-wadhwa12.github.io/Flavor-Fiesta/',
     githubUrl: 'https://github.com/megha-wadhwa12/Flavor-Fiesta',
     features: [
